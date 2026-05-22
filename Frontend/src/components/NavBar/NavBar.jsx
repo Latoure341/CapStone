@@ -38,10 +38,20 @@ const NavBar = () => {
       <SearchContainer>
         <SearchSecondContainer>
           <div>
-            <h1>Hotels</h1>
+            <h6>Hotels</h6>
+            <p>Select Hotels</p>
           </div>
-          <div>Check ins</div>
-          <div>Check Out</div>
+          <div>|</div>
+          <div>
+            <h6>Check ins</h6>
+            <p>Add dates</p>
+          </div>
+          <div>|</div>
+          <div>
+            <h6>Check Out</h6>
+            <p>Add dates</p>
+          </div>
+          <div>|</div>
           <span>
             <CiSearch />
           </span>

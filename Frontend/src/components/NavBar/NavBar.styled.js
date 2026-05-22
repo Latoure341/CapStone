@@ -41,26 +41,40 @@ export const SearchContainer = styled.div`
   align-items: center;
 
   padding: 1rem;
-  margin: 1rem auto;
 `;
 
 export const SearchSecondContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 2rem;
+  padding: 0.5rem 1rem;
 
   background: white;
   color: black;
-  border-radius: 15px;
+  border-radius: 25px;
 
   span {
-    background-color: pink;
+    background-color: rgb(222,49,81);
     color: white;
-    font-weight: 700;
+    font-weight: 900;
     border-radius: 50%;
     text-align: center;
+    padding: 0.4rem 0.5rem;
+  }
+    div {
+      padding: 0.2rem 0.2rem;
+    }
+
+  p {
+    font-size: 0.8rem;
+    color: gray;
+    padding: 0;
+    margin: 0.1rem 0;
+  }
+  h6 {
+    padding: 0;
+    margin: 0;
   }
 `;
 
