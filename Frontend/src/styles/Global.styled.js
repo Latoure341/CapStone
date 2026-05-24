@@ -8,8 +8,9 @@ export const GlobalStyle = createGlobalStyle`
   body {
     width: 100vw;
     overflow-x: hidden;
+    margin: 0;
     
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
   }
 `;
