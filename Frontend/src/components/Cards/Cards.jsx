@@ -1,5 +1,7 @@
 import React from 'react'
-import { CardContainer, CardSubContainer, CardWrapper, CardSubWrapper } from './Cards.styled'
+import { CardContainer, CardSubContainer,
+    CardWrapper, CardSubWrapper,
+    CardExperienceWrapper, GiftCardWrapper } from './Cards.styled'
 const Cards = () => {
   return (
     <CardContainer>
@@ -38,9 +40,35 @@ const Cards = () => {
                     <p>150 km away</p>
                 </span>
             </CardSubWrapper>
-            
         </CardWrapper>
     </CardSubContainer>
+
+    <CardSubContainer>
+        <h2>Discover AirBnB Experiences</h2>
+        <CardWrapper>
+            <CardExperienceWrapper>
+                <h2>Things to do on your trip</h2>
+                <button>Experiences</button>
+            </CardExperienceWrapper>
+            <CardExperienceWrapper secondwrapper>
+                <h2>Things to do from home</h2>
+                <button>Online Experiences</button>
+            </CardExperienceWrapper>
+        </CardWrapper>
+    </CardSubContainer>
+
+    <CardSubContainer>
+        <CardWrapper>
+            <GiftCardWrapper>
+                <h2>Shop AirBnB gift cards</h2>
+                <button>Learn more</button>
+            </GiftCardWrapper>
+            <GiftCardWrapper>
+                <img src="https://a0.muscache.com/im/pictures/eb9c7c6a-1ac4-4f9f-8378-ef740405e5c5.jpg" alt="Gift Card Image" className='giftCardImage'/>
+            </GiftCardWrapper>
+        </CardWrapper>
+    </CardSubContainer>
+
     </CardContainer>
   )
 }

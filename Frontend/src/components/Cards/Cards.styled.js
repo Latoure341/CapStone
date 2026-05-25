@@ -51,3 +51,34 @@ export const CardSubWrapper = styled.span`
         margin: 0 0 1rem 0;
     }
 `
+
+export const CardExperienceWrapper = styled.span`
+    width: 48%;
+    height: 60vh;
+
+    color: white;
+    background-image: ${({ secondwrapper }) => secondwrapper ? 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAlurIrdmF2Donze9YzWRYobXP-nDaSD_Ykg&s)' : 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnTruikTeB5wM_ClhuWSf9-mMYX-dpHNm9kQ&s)'};
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    
+    h2 {
+        width: 50%;
+        font-size: 3rem;
+        font-weight: 500;
+        margin: 4rem 0 0 4rem;
+        padding: 0;
+    }
+        button {
+            margin: 0.5rem 0 0 4rem;
+            background-color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+        }
+`
+
+export const GiftCardWrapper = styled.span`
+
+`
