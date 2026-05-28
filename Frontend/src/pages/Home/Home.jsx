@@ -1,19 +1,21 @@
-import React from 'react'
-import { Container } from './Home.styled'
-import NavBar from '../../components/NavBar/NavBar.jsx'
-import Cta from '../../components/CTA/Cta.jsx'
-import Cards from '../../components/Cards/Cards.jsx'
+import React from "react";
+import { Container } from "./Home.styled";
+import NavBar from "../../components/NavBar/NavBar.jsx";
+import Cta from "../../components/CTA/Cta.jsx";
+import Cards from "../../components/Cards/Cards.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
 
 const Home = () => {
   return (
     <>
-    <Container>
-      <NavBar />
-      <Cta />
-    </Container>
-    <Cards />
+      <Container>
+        <NavBar />
+        <Cta />
+      </Container>
+      <Cards />
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

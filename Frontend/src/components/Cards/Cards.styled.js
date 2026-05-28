@@ -138,3 +138,24 @@ export const CardQuestions = styled.div`
     box-shadow: 0 4px 8px rgba(19, 19, 19, 0.81);
   }
 `;
+
+export const InspirationCardWrapper = styled.div`
+  width: 100%;
+
+  .inspirationCategories {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5rem;
+  }
+    .inspirationDestinations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+
+    }
+`;

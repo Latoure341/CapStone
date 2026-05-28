@@ -6,7 +6,7 @@ import {
   CardSubWrapper,
   CardExperienceWrapper,
   GiftCardWrapper,
-  CardQuestions,
+  CardQuestions, InspirationCardWrapper
 } from "./Cards.styled";
 const Cards = () => {
   return (
@@ -109,17 +109,27 @@ const Cards = () => {
 
       <CardSubContainer>
         <CardWrapper>
-          <div>
-            <h2>Inspiration for the future</h2>
-            <div>
-              <span>1</span>
+          <InspirationCardWrapper>
+            <h2>Inspiration for future gateways</h2>
+            <div className="inspirationCategories">
+              <span>Destination for art & culture</span>
+              <span>Destination for outdoor adventure</span>
+              <span>Mountain cabins</span>
+              <span>Beach destinations</span>
+              <span>Popular destinations</span>
+              <span>Unique stays</span>
+            </div>
+
+            <div className="inspirationDestinations">
+              <span>
+                <p>Phoenix</p>
+                <p>Arizona</p>
+              </span>
               <span>2</span>
               <span>3</span>
               <span>4</span>
-              <span>5</span>
-              <span>6</span>
             </div>
-          </div>
+          </InspirationCardWrapper>
         </CardWrapper>
       </CardSubContainer>
     </CardContainer>
