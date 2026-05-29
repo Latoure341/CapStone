@@ -1,5 +1,11 @@
 import React from "react";
-import { FooterContainer, FooterWrapper, FooterDiv, CopyrightDiv } from "./Footer.styled.js";
+import { CiGlobe } from "react-icons/ci";
+import { IoLogoFacebook } from "react-icons/io5";
+import { FaTwitter } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FooterContainer, FooterWrapper,
+  FooterDiv, CopyrightDiv, 
+  SocialsWrapper } from "./Footer.styled.js";
 
 const Footer = () => {
   return (
@@ -30,8 +36,18 @@ const Footer = () => {
           <span>Visit our community forum</span>
           <span>How to host responsibly</span>
         </FooterDiv>
+        <FooterDiv>
+          <h2>About</h2>
+          <span>Newsroom</span>
+          <span>Learn about new features</span>
+          <span>Learn from our founders</span>
+          <span>Careers</span>
+          <span>Investors</span>
+          <span>Airbnb Luxe</span>
+        </FooterDiv>
       </FooterWrapper>
-      <CopyrightDiv>
+      <FooterWrapper copywright={true}>
+        <CopyrightDiv>
         <span>© 2024 Airbnb, Inc.</span>
         <span>·</span>
         <span>Privacy</span>
@@ -40,6 +56,20 @@ const Footer = () => {
         <span>·</span>
         <span>Sitemap</span>
       </CopyrightDiv>
+      <SocialsWrapper>
+        <span>
+          <CiGlobe />
+        <p>English (US)</p>
+        <p>$</p>
+        <p>USD</p>
+        </span>
+        <span>
+          <IoLogoFacebook />
+          <FaTwitter/>
+          <FaInstagram/>
+        </span>
+      </SocialsWrapper>
+      </FooterWrapper>
     </FooterContainer>
   );
 };

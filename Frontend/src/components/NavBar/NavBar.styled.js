@@ -71,6 +71,7 @@ export const SearchSecondContainer = styled.div`
     color: gray;
     padding: 0;
     margin: 0.1rem 0;
+    cursor: pointer;
   }
   h6 {
     padding: 0;

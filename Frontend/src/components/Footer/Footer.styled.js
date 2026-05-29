@@ -13,8 +13,8 @@ export const FooterWrapper = styled.div`
   align-items: center;
   flex-wrap: wrap;
 
-  padding: 0 0 3rem 0;
-  border-bottom: 1px solid rgb(204, 204, 204);
+  padding: ${({copywright}) => (copywright ? "0" : "0 0 3rem 0")};
+  border-bottom: ${({copywright}) => (copywright ? "none" : "1px solid rgb(204, 204, 204)")};
 `;
 
 export const FooterDiv = styled.div`
@@ -41,4 +41,18 @@ export const CopyrightDiv = styled.div`
   padding: 1rem 0;
   color: rgb(102, 102, 102);
   font-size: 1rem;
+`;
+
+export const SocialsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  }
 `;

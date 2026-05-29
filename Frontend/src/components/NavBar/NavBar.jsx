@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../assets/airbnb.svg?react";
 import { IoIosMenu } from "react-icons/io";
 import { MdAccountCircle } from "react-icons/md";
@@ -14,6 +14,12 @@ import {
 } from "./NavBar.styled.js";
 
 const NavBar = () => {
+  const [modalLocation, setModalLocation] = useState(false);
+  const handleHotelSelect = () => {
+    console.log("Hotels selected");
+    setModalLocation(!modalLocation);
+  }
+
   return (
     <>
       <NavContainer>
@@ -26,7 +32,7 @@ const NavBar = () => {
           <ElementStyle>Online Experiences</ElementStyle>
         </NavSecondContainer>
         <NavSecondContainer>
-          <p>Become a host</p>
+          <p onClick={() => console.log("Become a host clicked")}>Become a host</p>
           <CiGlobe />
           <MenuAccount>
             <IoIosMenu />
@@ -39,17 +45,17 @@ const NavBar = () => {
         <SearchSecondContainer>
           <div>
             <h6>Hotels</h6>
-            <p>Select Hotels</p>
+            <p onClick={() => handleHotelSelect()}>Select Hotels</p>
           </div>
           <div>|</div>
           <div>
             <h6>Check ins</h6>
-            <p>Add dates</p>
+            <p onClick={() => console.log("Check-in dates added")}>Add dates</p>
           </div>
           <div>|</div>
           <div>
             <h6>Check Out</h6>
-            <p>Add dates</p>
+            <p onClick={() => console.log("Check-out dates added")}>Add dates</p>
           </div>
           <div>|</div>
           <span>
