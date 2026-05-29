@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Logo from "../../assets/airbnb.svg?react";
 import { IoIosMenu } from "react-icons/io";
 import { MdAccountCircle } from "react-icons/md";
 import { CiGlobe, CiSearch } from "react-icons/ci";
 
+import { HotelLocationContext } from "../../context/HotelLocationContext.jsx";
 import {
   NavContainer,
   NavSecondContainer,
@@ -14,10 +15,10 @@ import {
 } from "./NavBar.styled.js";
 
 const NavBar = () => {
-  const [modalLocation, setModalLocation] = useState(false);
+  const { hotelModal, setHotelModal} = useContext(HotelLocationContext);
   const handleHotelSelect = () => {
-    console.log("Hotels selected");
-    setModalLocation(!modalLocation);
+    setHotelModal(!hotelModal);
+    console.log(hotelModal);
   }
 
   return (
