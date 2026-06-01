@@ -5,13 +5,18 @@ export const NavContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
-  margin: 0 0.5rem;
+  margin: 0;
   font-weight: 600;
+`;
 
-  .logo {
-    background-color: black;
-    color: white;
-  }
+export const LogoWrapper = styled.svg`
+  padding: 0;
+  margin: 0;
+  height: 65px;
+  rect {
+    fill: transparent;
+  };
+  cursor: pointer;
 `;
 
 export const NavSecondContainer = styled.div`
@@ -47,24 +52,25 @@ export const SearchSecondContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: ${({listing}) => listing ? "0.5rem" : "2rem"};
   padding: 0.5rem 1rem;
 
   background: white;
   color: black;
   border-radius: 25px;
+  box-shadow: ${({ listing }) =>    listing ? "0 3px 3px rgba(0, 0, 0, 0.1)" : " "};
 
   span {
-    background-color: rgb(222,49,81);
+    background-color: rgb(222, 49, 81);
     color: white;
     font-weight: 900;
-    border-radius: 50%;
+    border-radius: 49%;
     text-align: center;
-    padding: 0.4rem 0.5rem;
+    padding: 0.3rem 0.5rem;
   }
-    div {
-      padding: 0.2rem 0.2rem;
-    }
+  div {
+    padding: 0.2rem 0.2rem;
+  }
 
   p {
     font-size: 0.8rem;
@@ -77,6 +83,20 @@ export const SearchSecondContainer = styled.div`
     padding: 0;
     margin: 0;
   }
+    select {
+      border: none;
+      outline: none;
+      font-size: 0.8rem;
+    }
+      
+      option {
+      border: none;
+      outline: none;
+      font-size: 0.8rem;
+    }
+      option:hover {
+        background-color: lightgray;
+      }
 `;
 
 export const ElementStyle = styled.p`
