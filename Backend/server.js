@@ -1,7 +1,11 @@
 const dotenv = require('dotenv');
 const express = require('express');
 const mongoose = require('mongoose');
+const dns = require('dns');
 const cors = require('cors');
+
+//Routes
+const userRoutes = require('./routes/userRoutes');
 
 dotenv.config();
 
@@ -26,6 +30,8 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.json());
+app.use('/api/user', userRoutes);
+
 
 // Health route
 app.get('/', (req, res) => {
@@ -48,6 +54,10 @@ app.use((req, res) => {
   });
 });
 
+dns.setServers([
+  '8.8.8.8',
+  '1.1.1.1'
+])
 mongoose.connect(mongoUrl, {family: 4})
   .then(() => {
     console.log('Connected to MongoDB');
