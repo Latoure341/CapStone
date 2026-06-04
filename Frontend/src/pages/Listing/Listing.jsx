@@ -5,8 +5,10 @@ import { IoIosMenu } from "react-icons/io";
 import { MdAccountCircle } from "react-icons/md";
 import { CiGlobe, CiSearch } from "react-icons/ci";
 import {
-  NavContainer, SearchContainer,
-  NavSecondContainer, SearchSecondContainer,
+  NavContainer,
+  SearchContainer,
+  NavSecondContainer,
+  SearchSecondContainer,
   MenuAccount,
   ElementStyle,
   LogoWrapper,
@@ -18,36 +20,35 @@ const Listing = () => {
   return (
     <div>
       <NavContainer listing>
-        <LogoWrapper >
+        <LogoWrapper>
           <Logo className="logo" />
         </LogoWrapper>
         <NavSecondContainer>
-         <SearchContainer listing>
-                 <SearchSecondContainer listing>
-                   <div>
-                     <select>
-                      <option>{hotelLocation}</option>
-                      <option>Cape Town</option>
-                      <option>Johannesburg</option>
-                      <option>Sandton</option>
-                      <option>Alberton</option>
-                     </select>
-                   </div>
-                   <div>|</div>
-                   <div>
-                     <p>Add dates</p>
-                   </div>
-                   <div>|</div>
-                   <div>
-                     
-                     <p>Add guests</p>
-                   </div>
-                   <div>|</div>
-                   <span>
-                     <CiSearch />
-                   </span>
-                 </SearchSecondContainer>
-               </SearchContainer>
+          <SearchContainer listing>
+            <SearchSecondContainer listing>
+              <div>
+                <select>
+                  <option>{hotelLocation}</option>
+                  <option>Cape Town</option>
+                  <option>Johannesburg</option>
+                  <option>Sandton</option>
+                  <option>Alberton</option>
+                </select>
+              </div>
+              <div>|</div>
+              <div>
+                <p>Add dates</p>
+              </div>
+              <div>|</div>
+              <div>
+                <p>Add guests</p>
+              </div>
+              <div>|</div>
+              <span>
+                <CiSearch />
+              </span>
+            </SearchSecondContainer>
+          </SearchContainer>
         </NavSecondContainer>
         <NavSecondContainer>
           <p onClick={() => console.log("Become a host clicked")}>

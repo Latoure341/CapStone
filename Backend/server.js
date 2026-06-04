@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // CORS
-const allowedOriginsEnv = process.env.CORS_ORIGIN || '';
+const allowedOriginsEnv = "http://localhost:5173"; // Default value for development
 const allowedOrigins = allowedOriginsEnv
   .split(',')
   .map((origin) => origin.trim())
@@ -21,7 +21,7 @@ const allowedOrigins = allowedOriginsEnv
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
