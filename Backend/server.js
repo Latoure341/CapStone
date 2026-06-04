@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // CORS
-const allowedOriginsEnv = "http://localhost:5173"; // Default value for development
+const allowedOriginsEnv = process.env.CORS_ORIGIN;
 const allowedOrigins = allowedOriginsEnv
   .split(',')
   .map((origin) => origin.trim())
