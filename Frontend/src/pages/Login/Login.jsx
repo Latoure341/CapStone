@@ -13,6 +13,7 @@ import {
   MenuAccount,
   LogoWrapper
 } from "../../components/NavBar/NavBar.styled.js";
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const Login = () => {
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Login = () => {
         e.preventDefault();
         // Handle login logic here
         // After successful login, navigate to the listing page
-        axios.post("http://localhost:5000/api/user/login", { email, password })
+        axios.post(`${apiBaseUrl}/api/user/login`, { email, password })
             .then((response) => {
                 // Handle successful login
                 navigate("/listing");
