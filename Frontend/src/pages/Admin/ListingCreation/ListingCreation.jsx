@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ListContainer, FormWrapper,
-  SecondFormWrapper, SpanContainer } from "./ListingCreation.styled.js";
+  SecondFormWrapper, SpanContainer,
+  SpanUpperContainer, Button, ButtonWrapper } from "./ListingCreation.styled.js";
 
 const ListingCreation = () => {
   const [formData, setFormData] = useState({
@@ -203,6 +204,8 @@ const ListingCreation = () => {
             <SpanContainer>
               <label>Description </label>
               <textarea 
+              cols={32}
+              rows={7}
                 name="description"
                 value={formData.description}
                 onChange={handleInputChange}
@@ -212,25 +215,29 @@ const ListingCreation = () => {
           </div>
 
           <div>
-            <div>
+            <SpanUpperContainer>
               <SpanContainer>
                 <label>Rooms</label>
                 <input 
                   type="number" 
+                  placeholder="2"
                   name="rooms"
                   value={formData.rooms}
                   onChange={handleInputChange}
                 />
               </SpanContainer>
+
               <SpanContainer>
                 <label>Baths</label>
                 <input 
-                  type="number" 
+                  type="number"
+                  placeholder="1" 
                   name="baths"
                   value={formData.baths}
                   onChange={handleInputChange}
                 />
               </SpanContainer>
+
               <SpanContainer>
                 <label>Type</label>
                 <select
@@ -242,12 +249,14 @@ const ListingCreation = () => {
                   <option>Hotel Suite</option>
                 </select>
               </SpanContainer>
-            </div>
-            <div>
+            </SpanUpperContainer>
+            
+            <SpanUpperContainer>
               <SpanContainer>
                 <label>Guests</label>
                 <input 
                   type="number" 
+                  placeholder="4"
                   name="guests"
                   value={formData.guests}
                   onChange={handleInputChange}
@@ -257,6 +266,7 @@ const ListingCreation = () => {
                 <label>Price (R)</label>
                 <input 
                   type="number" 
+                  placeholder="800"
                   name="price"
                   value={formData.price}
                   onChange={handleInputChange}
@@ -270,9 +280,9 @@ const ListingCreation = () => {
                   onChange={(e) => setAmenityInput(e.target.value)}
                   placeholder="e.g., WiFi, Pool, Gym"
                 />
-                <button type="button" onClick={handleAddAmenity}>Add +</button>
+              <Button type="button" onClick={handleAddAmenity}>Add +</Button>
               </SpanContainer>
-            </div>
+            </SpanUpperContainer>
           </div>
 
           {/* Display added amenities */}
@@ -283,13 +293,12 @@ const ListingCreation = () => {
                 {formData.amenities.map((amenity, index) => (
                   <div key={index} style={{ display: "flex", gap: "10px", marginBottom: "5px" }}>
                     <span>{amenity}</span>
-                    <button 
+                    <Button 
                       type="button" 
                       onClick={() => handleRemoveAmenity(index)}
-                      style={{ color: "red" }}
                     >
                       Remove
-                    </button>
+                    </Button>
                   </div>
                 ))}
               </div>
@@ -317,7 +326,7 @@ const ListingCreation = () => {
                     alt={`Preview ${index + 1}`}
                     style={{ width: "100%", height: "100px", objectFit: "cover", borderRadius: "4px" }}
                   />
-                  <button 
+                  <button
                     type="button" 
                     onClick={() => {
                       setImages(images.filter((_, i) => i !== index));
@@ -333,12 +342,12 @@ const ListingCreation = () => {
           )}
         </div>
 
-        <div>
-          <button type="button" disabled={loading} onClick={handleSubmit}>
+        <ButtonWrapper>
+          <Button type="button" disabled={loading} onClick={handleSubmit}>
             {loading ? "Creating..." : "Create"}
-          </button>
-          <button type="button" onClick={handleCancel}>Cancel</button>
-        </div>
+          </Button>
+          <Button type="button" onClick={handleCancel} cancel>Cancel</Button>
+        </ButtonWrapper>
       </FormWrapper>
     </ListContainer>
   );
