@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { HotelLocationContext } from "../../context/HotelLocationContext.jsx";
 import Logo from "../../assets/airbnb.svg?react";
@@ -18,8 +19,10 @@ import { ListingContainer, FilterContainer,
   ListingSecondContainer, ImageWrapper, 
   ListingButton, DetailsWrapper } from "./Listing.styled.js";
 
+
 const Listing = () => {
   const { hotelLocation } = useContext(HotelLocationContext);
+  const navigate = useNavigate()
   const listingPlaces = axios.get()
 
   return (
@@ -79,7 +82,7 @@ const Listing = () => {
         </FilterContainer>
       </ListingContainer>
 
-      <ListingSecondContainer>
+      <ListingSecondContainer onClick={() => {navigate("/preview")}}>
         <div>
           <ImageWrapper>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc92YDBhnHGuBdtpQ3ThMYSUsz8lCePnq0iA&s" 
