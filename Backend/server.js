@@ -6,6 +6,7 @@ const cors = require('cors');
 
 //Routes
 const userRoutes = require('./routes/userRoutes');
+const listingRoutes = require('./routes/listingRoutes');
 
 dotenv.config();
 
@@ -29,8 +30,12 @@ app.use(cors({
   },
   credentials: true,
 }));
+
 app.use(express.json());
+
+// Routes
 app.use('/api/user', userRoutes);
+app.use('/api/listings', listingRoutes);
 
 
 // Health route
