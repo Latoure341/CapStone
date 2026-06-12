@@ -46,7 +46,7 @@ const Footer = () => {
           <span>Airbnb Luxe</span>
         </FooterDiv>
       </FooterWrapper>
-      <FooterWrapper copywright>
+      <FooterWrapper copywright="true">
         <CopyrightDiv>
         <span>© 2024 Airbnb, Inc.</span>
         <span>·</span>

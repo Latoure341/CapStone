@@ -62,10 +62,9 @@ const createListing = async (req, res) => {
 const getAllListings = async (req, res) => {
   try {
     const listings = await Listing.find();
-    res.status(200).json({
-      message: "Listings retrieved successfully",
-      listings,
-    });
+    res.status(200).json(
+      listings
+    );
   } catch (error) {
     console.error("Error fetching listings:", error);
     res.status(500).json({ error: "Failed to fetch listings", details: error.message });

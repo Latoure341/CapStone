@@ -346,7 +346,7 @@ const ListingCreation = () => {
           <Button type="button" disabled={loading} onClick={handleSubmit}>
             {loading ? "Creating..." : "Create"}
           </Button>
-          <Button type="button" onClick={handleCancel} cancel>Cancel</Button>
+          <Button type="button" onClick={handleCancel} cancel="true">Cancel</Button>
         </ButtonWrapper>
       </FormWrapper>
     </ListContainer>

@@ -1,12 +1,12 @@
-const dotenv = require('dotenv');
-const express = require('express');
-const mongoose = require('mongoose');
-const dns = require('dns');
-const cors = require('cors');
+const dotenv = require("dotenv");
+const express = require("express");
+const mongoose = require("mongoose");
+const dns = require("dns");
+const cors = require("cors");
 
 //Routes
-const userRoutes = require('./routes/userRoutes');
-const listingRoutes = require('./routes/listingRoutes');
+const userRoutes = require("./routes/userRoutes");
+const listingRoutes = require("./routes/listingRoutes");
 
 dotenv.config();
 
@@ -16,62 +16,60 @@ const port = process.env.PORT || 5000;
 // CORS
 const allowedOriginsEnv = process.env.CORS_ORIGIN;
 const allowedOrigins = allowedOriginsEnv
-  .split(',')
+  .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
 
-app.use(cors({
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (allowedOrigins) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 
 // Routes
-app.use('/api/user', userRoutes);
-app.use('/api/listings', listingRoutes);
-
+app.use("/api/user", userRoutes);
+app.use("/api/listings", listingRoutes);
 
 // Health route
-app.get('/', (req, res) => {
-  res.status(200).send('API is running...');
+app.get("/", (req, res) => {
+  res.status(200).send("API is running...");
 });
 
 // Database connection
 const mongoUrl = process.env.MONGO_URL;
-console.log(mongoUrl)
+console.log(mongoUrl);
 
 if (!mongoUrl) {
-  throw new Error('MONGO_URL is not set in environment variables');
+  throw new Error("MONGO_URL is not set in environment variables");
 }
 
 // Handle unmatched routes
 app.use((req, res) => {
   res.status(404).json({
     success: false,
-    message: 'Route not found',
+    message: "Route not found",
   });
 });
 
-dns.setServers([
-  '8.8.8.8',
-  '1.1.1.1'
-])
-mongoose.connect(mongoUrl, {family: 4})
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
+mongoose
+  .connect(mongoUrl, { family: 4 })
   .then(() => {
-    console.log('Connected to MongoDB');
+    console.log("Connected to MongoDB");
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
     });
   })
   .catch((err) => {
-    console.error('Failed to connect to MongoDB', err);
+    console.error("Failed to connect to MongoDB", err);
     process.exit(1);
   });
-

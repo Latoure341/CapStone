@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { HotelLocationContext } from "../../context/HotelLocationContext.jsx";
 import Logo from "../../assets/airbnb.svg?react";
 import { IoIosMenu } from "react-icons/io";
@@ -15,28 +14,68 @@ import {
   ElementStyle,
   LogoWrapper,
 } from "../../components/NavBar/NavBar.styled.js";
-import { ListingContainer, FilterContainer, 
-  ListingSecondContainer, ImageWrapper, 
-  ListingButton, DetailsWrapper } from "./Listing.styled.js";
-
+import {
+  ListingContainer,
+  FilterContainer,
+  ListingSecondContainer,
+  ImageWrapper,
+  ListingButton,
+  DetailsWrapper,
+} from "./Listing.styled.js";
 
 const Listing = () => {
   const { hotelLocation } = useContext(HotelLocationContext);
-  const navigate = useNavigate()
-  const listingPlaces = axios.get()
+  const location =  hotelLocation == "" ? "All Locations" : hotelLocation;
+  const [listings, setListings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  // Retrieve data from Backend
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/listings/", {
+          method: "GET",
+          "Content-type": "application/json",
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to retrieve listings");
+        }
+
+        const data = await response.json();
+        setListings(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchListings();
+  }, []);
+
+  if (loading) {
+    return <h4>Loading listings...</h4>;
+  }
+
+  if (error) {
+    return <h4>Error: {error}</h4>;
+  }
 
   return (
     <>
-      <NavContainer listing>
+      <NavContainer listing="true">
         <LogoWrapper>
           <Logo className="logo" />
         </LogoWrapper>
         <NavSecondContainer>
-          <SearchContainer listing>
-            <SearchSecondContainer listing>
+          <SearchContainer listing="true">
+            <SearchSecondContainer listing="true">
               <div>
                 <select>
-                  <option>{hotelLocation}</option>
+                  <option>{location}</option>
                   <option>Cape Town</option>
                   <option>Johannesburg</option>
                   <option>Sandton</option>
@@ -82,29 +121,48 @@ const Listing = () => {
         </FilterContainer>
       </ListingContainer>
 
-      <ListingSecondContainer onClick={() => {navigate("/preview")}}>
-        <div>
-          <ImageWrapper>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc92YDBhnHGuBdtpQ3ThMYSUsz8lCePnq0iA&s" 
-            alt="Hotel image" />
-          </ImageWrapper>
-          <DetailsWrapper>
-            <span>
-              <p className="location">
-                Entire Home in {(hotelLocation === "All Locations") ? "several places"
-                  : hotelLocation}
-              </p>
-              <h1>Name of the place</h1>
-            </span>
-            <span>
-              <p className="details">4 guests · 2 bedrooms · 2 beds · 2 baths</p>
-              <p className="details">Wifi ‣ Kitchen ‣ Free Parking</p>
-            </span>
-            <span>
-              <p>5.0 ⭐ (100 reviews)</p>
-            </span>
-          </DetailsWrapper>
-        </div>
+      <ListingSecondContainer
+        onClick={() => {
+          navigate("/preview");
+        }}
+      >
+        {listings.length > 0 ? (
+          listings.map((itemListing) => {
+            (itemListing.location === Location ? console.log(wow): console.log("shit")) 
+            return (
+              <div>
+                <ImageWrapper>
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc92YDBhnHGuBdtpQ3ThMYSUsz8lCePnq0iA&s"
+                    alt="Hotel image"
+                  />
+                </ImageWrapper>
+                <DetailsWrapper>
+                  <span>
+                    <p className="location">
+                      Entire Home in{" "}
+                      {hotelLocation === "All Locations"
+                        ? "several places"
+                        : hotelLocation}
+                    </p>
+                    <h1>Name of the place</h1>
+                  </span>
+                  <span>
+                    <p className="details">
+                      4 guests · 2 bedrooms · 2 beds · 2 baths
+                    </p>
+                    <p className="details">Wifi ‣ Kitchen ‣ Free Parking</p>
+                  </span>
+                  <span>
+                    <p>5.0 ⭐ (100 reviews)</p>
+                  </span>
+                </DetailsWrapper>
+              </div>
+            );
+          })
+        ) : (
+          <p>No place in the location</p>
+        )}
       </ListingSecondContainer>
     </>
   );

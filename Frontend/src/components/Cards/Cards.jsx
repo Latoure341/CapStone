@@ -68,7 +68,7 @@ const Cards = () => {
             <h2>Things to do on your trip</h2>
             <button>Experiences</button>
           </CardExperienceWrapper>
-          <CardExperienceWrapper secondwrapper>
+          <CardExperienceWrapper secondwrapper="true">
             <h2>Things to do from home</h2>
             <button>Online Experiences</button>
           </CardExperienceWrapper>
@@ -76,7 +76,7 @@ const Cards = () => {
       </CardSubContainer>
 
       <CardSubContainer>
-        <CardWrapper giftcard>
+        <CardWrapper giftcard="true">
           <GiftCardWrapper>
             <h2>Shop AirBnB gift cards</h2>
             <button>Learn more</button>

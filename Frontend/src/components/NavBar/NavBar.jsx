@@ -32,7 +32,7 @@ const NavBar = () => {
 
   return (
     <>
-      <NavContainer conditionalStyle = {previewNavBar ? true : false}>
+      <NavContainer conditionalstyle = {previewNavBar ? "true" : "false"}>
         <LogoWrapper onClick={() => handleNavigation()}>
           <Logo className="logo" />
         </LogoWrapper>

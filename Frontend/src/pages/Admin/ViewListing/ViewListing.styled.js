@@ -12,5 +12,7 @@ export const DetailsWrapper = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
-
+    img {
+        width: 300px;
+    }
 `;
