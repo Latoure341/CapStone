@@ -7,14 +7,16 @@ import { NavBarContext } from '../../../context/NavBarContext.jsx';
 const LocationModal = () => {
   const navigate = useNavigate();
   const { hotelLocation, setHotelLocation } = useContext(HotelLocationContext)
+  const { setHotelModal } = useContext(HotelLocationContext);
   const { previewNavBar, setPreviewNavBar } = useContext(NavBarContext);
 
   const handleClick = (location) => {
     if(location.innerHTML !== " "){
       setHotelLocation(location.innerHTML);
+      setHotelModal(false);
       setPreviewNavBar(true);
       navigate("/listing");
-      // console.log(location.innerHTML);
+      
     }
   }
 

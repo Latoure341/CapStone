@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HotelLocationContext } from "../../context/HotelLocationContext.jsx";
+import { NavBarContext } from "../../context/NavBarContext.jsx";
 import Logo from "../../assets/airbnb.svg?react";
 import { IoIosMenu } from "react-icons/io";
 import { MdAccountCircle } from "react-icons/md";
@@ -24,9 +25,11 @@ import {
 } from "./Listing.styled.js";
 
 const Listing = () => {
-  const { hotelLocation } = useContext(HotelLocationContext);
-  const location =  hotelLocation == "" ? "All Locations" : hotelLocation;
+  const { hotelLocation, setHotelLocation } = useContext(HotelLocationContext);
+  const { setPreviewNavBar } = useContext(NavBarContext);
+  const location = hotelLocation == "" ? "All Locations" : hotelLocation;
   const [listings, setListings] = useState([]);
+  const [filteredListings, setFilteredListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -56,6 +59,18 @@ const Listing = () => {
     fetchListings();
   }, []);
 
+  // Filter listings based on selected location
+  useEffect(() => {
+    if (hotelLocation === "" || hotelLocation === "All Locations") {
+      setFilteredListings(listings);
+    } else {
+      const filtered = listings.filter(
+        (listing) => listing.location === hotelLocation,
+      );
+      setFilteredListings(filtered);
+    }
+  }, [listings, hotelLocation]);
+
   if (loading) {
     return <h4>Loading listings...</h4>;
   }
@@ -67,19 +82,31 @@ const Listing = () => {
   return (
     <>
       <NavContainer listing="true">
-        <LogoWrapper>
+        <LogoWrapper
+          onClick={() => {
+            setPreviewNavBar(false);
+            navigate("/");
+          }}
+        >
           <Logo className="logo" />
         </LogoWrapper>
         <NavSecondContainer>
           <SearchContainer listing="true">
             <SearchSecondContainer listing="true">
               <div>
-                <select>
+                <select
+                  onChange={(e) =>
+                    setHotelLocation(
+                      e.target.value === "All Locations" ? "" : e.target.value,
+                    )
+                  }
+                >
                   <option>{location}</option>
                   <option>Cape Town</option>
                   <option>Johannesburg</option>
                   <option>Sandton</option>
                   <option>Alberton</option>
+                  <option>All Locations</option>
                 </select>
               </div>
               <div>|</div>
@@ -111,7 +138,7 @@ const Listing = () => {
       </NavContainer>
 
       <ListingContainer>
-        <p>200+ AirBnB places to stay in {hotelLocation}</p>
+        <p>200+ AirBnB places to stay in {location}</p>
         <FilterContainer>
           <ListingButton>Free cancelation</ListingButton>
           <ListingButton>Type of place</ListingButton>
@@ -121,40 +148,51 @@ const Listing = () => {
         </FilterContainer>
       </ListingContainer>
 
-      <ListingSecondContainer
-        onClick={() => {
-          navigate("/preview");
-        }}
-      >
-        {listings.length > 0 ? (
-          listings.map((itemListing) => {
-            (itemListing.location === Location ? console.log(wow): console.log("shit")) 
+      <ListingSecondContainer>
+        {filteredListings.length > 0 ? (
+          filteredListings.map((itemListing) => {
+            const imageBuffer = itemListing.images[0].data;
             return (
-              <div>
+              <div
+                key={itemListing._id}
+                onClick={(e) => {
+                  setPreviewNavBar(false);
+                  localStorage.setItem("itemListing", JSON.stringify(itemListing))
+                  navigate("/preview");
+                }}
+              >
                 <ImageWrapper>
                   <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc92YDBhnHGuBdtpQ3ThMYSUsz8lCePnq0iA&s"
+                    src={`data:image/jpeg;base64,${imageBuffer}`}
                     alt="Hotel image"
                   />
                 </ImageWrapper>
                 <DetailsWrapper>
                   <span>
                     <p className="location">
-                      Entire Home in{" "}
+                      Entire Home in
                       {hotelLocation === "All Locations"
                         ? "several places"
-                        : hotelLocation}
+                        : " " + hotelLocation}
                     </p>
-                    <h1>Name of the place</h1>
+                    <h1>{itemListing.listName}</h1>
                   </span>
                   <span>
                     <p className="details">
-                      4 guests · 2 bedrooms · 2 beds · 2 baths
+                      {itemListing.guests || 4} guests ·{" "}
+                      {itemListing.bedrooms || 2} bedrooms ·{" "}
+                      {itemListing.beds || 2} beds · {itemListing.baths || 2}{" "}
+                      baths
                     </p>
-                    <p className="details">Wifi ‣ Kitchen ‣ Free Parking</p>
+                    <p className="details">
+                      {itemListing.amenities || "Wifi ‣ Kitchen ‣ Free Parking"}
+                    </p>
                   </span>
                   <span>
-                    <p>5.0 ⭐ (100 reviews)</p>
+                    <p>
+                      {itemListing.rating || 5.0} ⭐ (
+                      {itemListing.reviews || 100} reviews)
+                    </p>
                   </span>
                 </DetailsWrapper>
               </div>
