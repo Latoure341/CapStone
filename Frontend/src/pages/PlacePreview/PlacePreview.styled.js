@@ -28,6 +28,11 @@ export const ListingDetails = styled.span`
     margin-right: 0rem;
     font-size: 1rem;
   }
+  .reviews {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 600;
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -61,5 +66,40 @@ export const ImageGrid = styled.span`
   }
   img:nth-child(4) {
     border-bottom-right-radius: 10px;
+  }
+`;
+
+export const PlaceDetailContainer = styled.div`
+  display: flex;
+  align-items: start;
+  gap: 2rem;
+  padding: 0 3rem;
+`;
+
+export const DetailsContainer = styled.div`
+  width: 55%;
+  padding: 1rem 0;
+`;
+export const DetailsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid gray;
+`;
+export const DetailSubContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-bottom: 1px solid gray;
+
+  div {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  .cancel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 `;
