@@ -156,7 +156,7 @@ const Listing = () => {
               <div
                 key={itemListing._id}
                 onClick={(e) => {
-                  setPreviewNavBar(false);
+                  setPreviewNavBar(true);
                   localStorage.setItem("itemListing", JSON.stringify(itemListing))
                   navigate("/preview");
                 }}
