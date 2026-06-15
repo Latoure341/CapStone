@@ -79,6 +79,10 @@ export const PlaceDetailContainer = styled.div`
 export const DetailsContainer = styled.div`
   width: 55%;
   padding: 1rem 0;
+
+  .description {
+    border-bottom: 1px solid gray;
+  }
 `;
 export const DetailsWrapper = styled.div`
   display: flex;
@@ -93,13 +97,74 @@ export const DetailSubContainer = styled.div`
   border-bottom: 1px solid gray;
 
   div {
+    padding: 1rem 0;
     display: flex;
     gap: 1rem;
     align-items: center;
   }
+  h4,
+  p {
+    padding: 0;
+    margin: 0;
+  }
   .cancel {
+    padding: 1rem 0;
     display: flex;
     align-items: center;
     gap: 1rem;
+  }
+  .icon {
+    font-size: 1.5rem;
+  }
+`;
+
+export const SleepSection = styled.div`
+  border-bottom: 1px solid gray;
+  img {
+    width: 20rem;
+  }
+`;
+
+export const OfferSection = styled.div`
+  padding: 0.5rem;
+  border-bottom: 1px solid gray;
+
+  .offerContainer {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+  }
+`;
+export const OffersWrapper = styled.span`
+  diplay: flex;
+  align-items: center;
+`;
+
+export const DetailsSecondContainer = styled.div`
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(100, 100, 100, 0.2);
+  border-radius: 8px;
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  button {
+    padding: 1rem 9rem;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    background-color: rgb(222, 49, 81);
+    cursor: pointer;
+  }
+  .review {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .star {
+    font-size: 0.8rem;
+    padding: 0;
+    margin-top: -0.3rem;
   }
 `;
