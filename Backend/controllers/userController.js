@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 export const register = async (req, res) => {
     try {
-        const { email, password, confirmPassword } = req.body;
+        const { name, email, password, confirmPassword } = req.body;
         if (!email || !password || !confirmPassword) {
             return res.status(400).json({ message: "All fields are required" });
         }
@@ -14,12 +14,12 @@ export const register = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({
+            username: name,
             useremail: email,
             password: hashedPassword
         });
 
         await newUser.save();
-        console.log(User.length);
         return res.status(201).json({ message: "User registered successfully" });
 
     } catch (error) {
@@ -34,11 +34,13 @@ export const login = async (req, res) => {
             return res.status(400).json({message: "All fields are required"});
         }
         const user = await User.findOne({useremail: email});
+        const username = user.username;
         
         if(user){
             const result = await bcrypt.compare(password, user.password);
             if(result) {
-                return res.status(200).json({message: "Login successful"});
+                
+                return res.status(200).json({message: "Login successful", "username": username});
             } else {
                 return res.status(401).json({message: "Invalid credentials"});
             }

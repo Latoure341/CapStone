@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HotelLocationContext } from "../../context/HotelLocationContext.jsx";
 import { NavBarContext } from "../../context/NavBarContext.jsx";
+import { LogInContext } from "../../context/LogInContext.jsx";
 import Logo from "../../assets/airbnb.svg?react";
 import { IoIosMenu } from "react-icons/io";
 import { MdAccountCircle } from "react-icons/md";
@@ -27,12 +28,24 @@ import {
 const Listing = () => {
   const { hotelLocation, setHotelLocation } = useContext(HotelLocationContext);
   const { setPreviewNavBar } = useContext(NavBarContext);
+  const { setLoggedIn } = useContext(LogInContext);
+
   const location = hotelLocation == "" ? "All Locations" : hotelLocation;
   const [listings, setListings] = useState([]);
   const [filteredListings, setFilteredListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
   const navigate = useNavigate();
+
+  const handlePlacePreview = () => {
+    const checkLoggedIn = JSON.parse(localStorage.getItem("Logged In"));
+    if (checkLoggedIn) {
+      setLoggedIn(true);
+    }
+    setPreviewNavBar(true);
+    navigate("/preview");
+  };
 
   // Retrieve data from Backend
   useEffect(() => {
@@ -156,9 +169,8 @@ const Listing = () => {
               <div
                 key={itemListing._id}
                 onClick={(e) => {
-                  setPreviewNavBar(true);
                   localStorage.setItem("itemListing", JSON.stringify(itemListing))
-                  navigate("/preview");
+                  handlePlacePreview();
                 }}
               >
                 <ImageWrapper>

@@ -1,7 +1,9 @@
-import { useContext } from "react";
+import axios from "axios";
+import { useContext, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import { NavBarContext } from "../../context/NavBarContext.jsx";
+import { LogInContext } from "../../context/LogInContext.jsx";
 import { FaKitchenSet, FaRegShareFromSquare } from "react-icons/fa6";
 import { CiHeart, CiCalendar } from "react-icons/ci";
 import { SlScreenTablet } from "react-icons/sl";
@@ -9,9 +11,12 @@ import { IoHomeOutline } from "react-icons/io5";
 import { BsCamera, BsLeaf, BsStars, BsWifi } from "react-icons/bs";
 import { LuRefrigerator } from "react-icons/lu";
 import {
-  PlaceContainer, OfferSection,
-  SleepSection, OffersWrapper,
-  ListingDesc, DetailsSecondContainer,
+  PlaceContainer,
+  OfferSection,
+  SleepSection,
+  OffersWrapper,
+  ListingDesc,
+  DetailsSecondContainer,
   ListingDetails,
   ImageContainer,
   DetailsWrapper,
@@ -22,23 +27,37 @@ import {
   DetailSubContainer,
 } from "./PlacePreview.styled.js";
 import { MdDryCleaning, MdSecurity } from "react-icons/md";
+import { useNavigate } from "react-router";
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const PlacePreview = () => {
+  const navigate = useNavigate();
   const { previewNavBar, setPreviewNavBar } = useContext(NavBarContext);
+  const { loggedIn, setLoggedIn } = useContext(LogInContext);
   const itemListing = JSON.parse(localStorage.getItem("itemListing"));
-  const [reservedInfo, setReserverdInfo] = useState({})
+  const [reservedInfo, setReserverdInfo] = useState({});
   const bufferImage = itemListing.images[0].data;
+  const username = JSON.parse(localStorage.getItem("LoginDetails"));
 
   const reservationHandler = () => {
-    setReserverdInfo({
-      "BookedBy": "The name",
-      "property": itemListing.listingName,
-      "checkedIn": "02/09/2026",
-      "checkedOut": "05/09/2026",
-    })
-    console.log(reservedInfo.BookedBy);
-  }
-
+    const payload = {
+      BookedBy: username.username,
+      property: itemListing.listName,
+      checkedIn: "02/09/2026",
+      checkedOut: "05/09/2026",
+    };
+    setReserverdInfo(payload);
+    console.log(payload.property);
+    axios
+      .post(`${apiBaseUrl}/api/reservation/reserve`, payload)
+      .then((response) => {
+        alert(response.data.message);
+        navigate('/listing');
+      })
+      .catch((error) => {
+        console.error("Reservation error:", error);
+      });
+  };
 
   return (
     <>
@@ -140,8 +159,10 @@ const PlacePreview = () => {
           <SleepSection>
             <h3>Where you'll sleeping</h3>
             <span>
-              <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjBiZWRyb29tfGVufDB8fDB8fHww" 
-              alt="bedroom" />
+              <img
+                src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjBiZWRyb29tfGVufDB8fDB8fHww"
+                alt="bedroom"
+              />
               <p>
                 Bedroom <br /> 1 queen bed.
               </p>
@@ -213,12 +234,17 @@ const PlacePreview = () => {
         <DetailsSecondContainer>
           <span>
             <h4>R {itemListing.price} /Night</h4>
-            <p className="review"> <span className="star">⭐</span> 5.0 · 200 reviews</p>
+            <p className="review">
+              {" "}
+              <span className="star">⭐</span> 5.0 · 200 reviews
+            </p>
           </span>
           <span>
             <p>The check out, check-in and guests details</p>
           </span>
-          <button type="button" onClick={reservationHandler()}>Reserve</button>
+          <button type="button" onClick={() => reservationHandler()}>
+            Reserve
+          </button>
           <p>You won't be charged yet</p>
           <div>
             <span>

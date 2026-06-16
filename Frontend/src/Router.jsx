@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login.jsx";
 import AdminDashboard from './pages/Admin/AdminDashboard/AdminDashboard.jsx';
 import PlacePreview from './pages/PlacePreview/PlacePreview.jsx';
 import ListingCreation from './pages/Admin/ListingCreation/ListingCreation.jsx';
+import Signup from './pages/Sign Up/Signup.jsx';
 
 const Router = () => {
   return (
@@ -15,6 +16,7 @@ const Router = () => {
             <Route path='/listing' element={<Listing />} />
             <Route path='/listingCreation' element={<ListingCreation />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
             <Route path='/admin' element={<AdminDashboard />} />
             <Route path='/preview' element={< PlacePreview/>} />
         </Routes>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoginContainer = styled.div`
+export const SignUpContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,12 +12,12 @@ export const LoginContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
-    padding: 2rem;
+    gap: 0.5rem;
+    padding: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     background-color: #ffffff;
-    
+
     p {
       color: rgb(93, 105, 219);
     }
@@ -25,12 +25,12 @@ export const LoginContainer = styled.div`
   span {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.1rem;
   }
   input {
     border: 1px solid #494949;
     border-radius: 4px;
-    padding: 0.5rem;
+    padding: 0.2rem;
     font-size: 1rem;
   }
   button {
@@ -39,18 +39,7 @@ export const LoginContainer = styled.div`
     border: none;
     border-radius: 4px;
     padding: 0.5rem 3rem;
-    font-size: 1rem;
+    font-size: 0.8rem;
     cursor: pointer;
-  }
-`;
-
-export const ParagraphWrapper = styled.p`
-  color: black !important;
-  
-  span {
-  color: blue;
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 4px;
   }
 `;

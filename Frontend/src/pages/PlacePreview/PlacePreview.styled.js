@@ -72,7 +72,7 @@ export const ImageGrid = styled.span`
 export const PlaceDetailContainer = styled.div`
   display: flex;
   align-items: start;
-  gap: 2rem;
+  gap: 4rem;
   padding: 0 3rem;
 `;
 
