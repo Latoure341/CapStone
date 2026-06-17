@@ -157,16 +157,16 @@ const updateListing = async (req, res) => {
 // Delete a listing
 const deleteListing = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { listName } = req.body;
 
-    const listing = await Listing.findById(id);
+    const listing = await Listing.findOne(listName);
 
     if (!listing) {
       return res.status(404).json({ error: "Listing not found" });
     }
 
     // Delete listing from database (images are stored in DB, no file cleanup needed)
-    await Listing.findByIdAndDelete(id);
+    await Listing.findOneAndDelete(listName);
 
     res.status(200).json({
       message: "Listing deleted successfully",

@@ -31,6 +31,6 @@ router.post("/", upload.array("images", 10), createListing);
 router.get("/", getAllListings);
 router.get("/:id", getListingById);
 router.put("/:id", upload.array("images", 10), updateListing);
-router.delete("/:id", deleteListing);
+router.delete("/delete", deleteListing);
 
 module.exports = router;

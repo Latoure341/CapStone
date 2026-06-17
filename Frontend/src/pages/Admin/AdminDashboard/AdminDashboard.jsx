@@ -18,8 +18,10 @@ import {
 import { ListingButton } from "../../Listing/Listing.styled.js";
 import { ListingButtonsContainer } from "./AdminDashboard.styled.js";
 import ViewReservation from "../Reservation/ViewReservation.jsx";
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
   const [createListing, setCreateListing] = useState(false);
   const [viewReservation, setViewReservation] = useState(false);
   const [viewListing, setViewListing] = useState(true);
@@ -41,8 +43,8 @@ const AdminDashboard = () => {
   };
   return (
     <>
-      <NavContainer listing>
-        <LogoWrapper>
+      <NavContainer listing="true">
+        <LogoWrapper onClick={() => navigate('/')}>
           <Logo className="logo" />
         </LogoWrapper>
 

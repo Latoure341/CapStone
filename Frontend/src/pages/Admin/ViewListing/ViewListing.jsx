@@ -1,16 +1,32 @@
 import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
 import {
   PlaceWrapper,
+  ButtonWrapper,
+  Title,
   ImageWrapper,
   DetailsWrapper,
 } from "./ViewListing.styled.js";
 import { HotelLocationContext } from "../../../context/HotelLocationContext.jsx";
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const ViewListing = () => {
   const { hotelLocation } = useContext(HotelLocationContext);
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const deleteHandler = async (listingName) => {
+    try {
+      const response = await axios.delete(`${apiBaseUrl}/api/listings/delete`, {
+        data: { listingName },
+      });
+      alert(response.data.message); // Server response payload
+      window.location.reload();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   // Retrieve data from Backend
   useEffect(() => {
@@ -47,12 +63,12 @@ const ViewListing = () => {
 
   return (
     <>
-      <h4>My Hotel List</h4>
+      <Title>Hotel List</Title>
       <div>
         {listings.length > 0 ? (
           listings.map((itemListing, index) => {
             const imageBuffer = itemListing.images[0].data;
-      
+
             return (
               <PlaceWrapper key={itemListing._id}>
                 <span>
@@ -60,19 +76,24 @@ const ViewListing = () => {
                     <img
                       src={`data:image/jpeg;base64,${imageBuffer}`}
                       alt={itemListing.listName}
-              
                     />
                   </ImageWrapper>
-                  <button>Edit</button>
-                  <button>Delete</button>
+                  <ButtonWrapper>
+                    <button className="edit">Update</button>
+                    <button
+                      onClick={() => {
+                        deleteHandler(itemListing.listName);
+                      }}
+                      className="delete"
+                    >
+                      Delete
+                    </button>
+                  </ButtonWrapper>
                 </span>
                 <DetailsWrapper>
                   <span>
                     <p className="location">
-                      Entire Home in{" "}
-                      {hotelLocation === "All Locations"
-                        ? "several places"
-                        : hotelLocation}
+                      Entire Home in {itemListing.location}
                     </p>
                     <h1>{itemListing.listName}</h1>
                   </span>
