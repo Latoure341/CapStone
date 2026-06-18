@@ -197,12 +197,17 @@ const Listing = () => {
                       baths
                     </p>
                     <p className="details">
-                      {itemListing.amenities || "Wifi ‣ Kitchen ‣ Free Parking"}
+                      {itemListing.amenities.map((item) => {
+                
+                        return (
+                          item + " · "
+                        )
+                      })}
                     </p>
                   </span>
                   <span>
                     <p>
-                      {itemListing.rating || 5.0} ⭐ (
+                      {itemListing.rating || "5.0"} ⭐ (
                       {itemListing.reviews || 100} reviews)
                     </p>
                   </span>

@@ -77,6 +77,13 @@ const NavBar = () => {
               </p>
             </div>
             <div>|</div>
+            <div>
+              <h6>Guests</h6>
+              <p onClick={() => console.log("Guests")}>
+                0 guests
+              </p>
+            </div>
+            <div>|</div>
             <span>
               <CiSearch />
             </span>

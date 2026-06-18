@@ -168,3 +168,72 @@ export const DetailsSecondContainer = styled.div`
     margin-top: -0.3rem;
   }
 `;
+
+export const DateAndGuests = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0 0 1rem 0;
+
+  .guestsContainer {
+    width: 96%;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+    .guest {
+      margin: 0;
+      padding: 0;
+    }
+      .optionContainer {
+        margin: 0.5rem auto;
+        padding: 0.2rem 0.5rem;
+        border: 1px solid gray;
+        border-radius: 5px;
+        color: rgb(150, 150, 150);
+        outline: none;
+      }
+        option {
+          
+        }
+`;
+export const DateWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+
+  .date,
+  .date-second {
+    display: block;
+    text-align: start;
+    padding: 0.2rem 1rem;
+  }
+  .date {
+    border: 1px solid gray;
+    border-top-left-radius: 8px;
+  }
+  .date-second {
+    border: 1px solid gray;
+    border-top-right-radius: 8px;
+  }
+  .title,
+  .input {
+    margin: 0.5rem auto 0.2rem auto;
+    padding: 0;
+  }
+  .title {
+    margin: 0.5rem auto 0 auto;
+  }
+  .input {
+    border: none;
+    border-radius: 5px;
+    margin: 0.5rem auto 0.2rem auto;
+    background-color: rgb(230, 230, 230);
+    padding: 0.2rem 0.5rem;
+  }
+`;

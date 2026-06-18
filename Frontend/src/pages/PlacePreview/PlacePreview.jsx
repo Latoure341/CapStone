@@ -11,8 +11,8 @@ import { IoHomeOutline } from "react-icons/io5";
 import { BsCamera, BsLeaf, BsStars, BsWifi } from "react-icons/bs";
 import { LuRefrigerator } from "react-icons/lu";
 import {
-  PlaceContainer,
-  OfferSection,
+  PlaceContainer, DateAndGuests,
+  OfferSection, DateWrapper,
   SleepSection,
   OffersWrapper,
   ListingDesc,
@@ -31,20 +31,45 @@ import { useNavigate } from "react-router";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const PlacePreview = () => {
+
   const navigate = useNavigate();
   const { previewNavBar, setPreviewNavBar } = useContext(NavBarContext);
   const { loggedIn, setLoggedIn } = useContext(LogInContext);
   const itemListing = JSON.parse(localStorage.getItem("itemListing"));
+
   const [reservedInfo, setReserverdInfo] = useState({});
+  const [ checkOutDate, setCheckOutDate] =useState("");
+  const [ checkInDate, setCheckInDate ] = useState("");
+  const [ daysDifference, setDaysDifference ] = useState("")
+
   const bufferImage = itemListing.images[0].data;
   const username = JSON.parse(localStorage.getItem("LoginDetails"));
+
+  //calculate days
+   const calculateDays = () => {
+    if (!checkOutDate|| !checkInDate) return (<p>Error</p>);
+
+    // Convert inputs into Date objects
+    const start = new Date(checkInDate);
+    const end = new Date(checkOutDate);
+
+    // Calculate the difference in milliseconds
+    const differenceInMs = end - start;
+
+    // Divide by milliseconds in a day: 1000ms * 60s * 60m * 24h
+    const millisecondsPerDay = 1000 * 60 * 60 * 24;
+    const days = Math.floor(differenceInMs / millisecondsPerDay);
+    console.log(days)
+
+    setDaysDifference(days);
+  };
 
   const reservationHandler = () => {
     const payload = {
       BookedBy: username.username,
       property: itemListing.listName,
-      checkedIn: "02/09/2026",
-      checkedOut: "05/09/2026",
+      checkedIn: checkInDate,
+      checkedOut: checkOutDate,
     };
     setReserverdInfo(payload);
     console.log(payload.property);
@@ -117,7 +142,8 @@ const PlacePreview = () => {
               </p>
             </span>
             <span>
-              <img src="#" />
+              <img src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" 
+              alt="Picture of the host..." height={70}/>
             </span>
           </DetailsWrapper>
           <DetailSubContainer>
@@ -231,6 +257,7 @@ const PlacePreview = () => {
             <div>3</div>
           </div>
         </DetailsContainer>
+
         <DetailsSecondContainer>
           <span>
             <h4>R {itemListing.price} /Night</h4>
@@ -239,29 +266,66 @@ const PlacePreview = () => {
               <span className="star">⭐</span> 5.0 · 200 reviews
             </p>
           </span>
-          <span>
-            <p>The check out, check-in and guests details</p>
-          </span>
+          <DateAndGuests>
+            <DateWrapper>
+              <span className="date">
+                <h6 className="title">Check In</h6>
+                <input
+                  className="input"
+                  type="date"
+                  value={checkInDate}
+                  onChange={(e) => {
+                    setCheckInDate(e.target.value)
+                    calculateDays();
+                  }}
+                  placeholder="02/02/2026"
+                />
+              </span>
+              <span className="date-second">
+                <h6 className="title">Check Out</h6>
+                <input
+                  className="input"
+                  type="date"
+                  value={checkOutDate}
+                  onChange={(e) => {
+                    setCheckOutDate(e.target.value);
+                    calculateDays();
+                  }}
+                  placeholder="02/03/2026"
+                />
+              </span>
+            </DateWrapper>
+            <div className="guestsContainer">
+              <h6 className="guest">Guests</h6>
+              <select className="optionContainer">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </DateAndGuests>
           <button type="button" onClick={() => reservationHandler()}>
             Reserve
           </button>
           <p>You won't be charged yet</p>
           <div>
             <span>
-              <p>R{itemListing.price} x 1 night</p>
-              <p>Price</p>
+              <p>R{itemListing.price} x {daysDifference || "1"} night</p>
+              <p>R {itemListing.price * Number(daysDifference)}</p>
             </span>
             <span>
               <p>Weekly discount</p>
-              <p>Price</p>
+              <p>R {0.1 * (itemListing.price * Number(daysDifference))}</p>
             </span>
             <span>
               <p>Cleaning Fee</p>
-              <p>R75</p>
+              <p>R{75}</p>
             </span>
             <span>
               <p>Service Fee</p>
-              <p>R100</p>
+              <p>R {100}</p>
             </span>
             <span>
               <p>Occupancy taxes and Fees</p>
@@ -270,7 +334,7 @@ const PlacePreview = () => {
           </div>
           <span>
             <h4>Total</h4>
-            <p>The price</p>
+            <p>R {( itemListing.price * Number(daysDifference)) + (0.1 * (itemListing.price * Number(daysDifference))) + 175 + (itemListing.price * 0.05)} </p>
           </span>
         </DetailsSecondContainer>
       </PlaceDetailContainer>

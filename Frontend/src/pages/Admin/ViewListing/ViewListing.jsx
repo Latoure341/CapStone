@@ -102,7 +102,12 @@ const ViewListing = () => {
                       {itemListing.guests} guests · {itemListing.rooms} bedrooms
                       · {itemListing.rooms} beds · {itemListing.baths} baths
                     </p>
-                    <p className="details">{itemListing.amenities}</p>
+                    <p className="details">{itemListing.amenities.map((item) => {
+                
+                        return (
+                          item + " · "
+                        )
+                      })}</p>
                   </span>
                   <span>
                     <p>{itemListing.rating} ⭐ (120 reviews)</p>
