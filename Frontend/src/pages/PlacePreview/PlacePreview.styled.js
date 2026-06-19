@@ -140,6 +140,60 @@ export const OffersWrapper = styled.span`
   align-items: center;
 `;
 
+export const AmenityButton = styled.button`
+  padding: 0.5rem 1rem;
+  border: 2px solid black;
+  border-radius: 8px;
+`;
+
+export const CalendarWrapper = styled.div`
+  padding: 1rem;
+  h3,
+  .date {
+    margin: 0.1rem 0;
+    padding: 0;
+  }
+  .date {
+    font-size: 0.8rem;
+  }
+  .reserveDates {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: rgb(150, 150, 150);
+  }
+    .calendar {
+      padding: 1rem 0;
+    }
+`;
+export const ReviewsContainer = styled.div`
+  border-top: 1px solid gray;
+  padding: 0.5rem 0;
+  
+  .reviews {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+    .star {
+    margin-top: 0.7rem;
+    }
+    .anemity {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .reviewCategory {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+`;
+
 export const DetailsSecondContainer = styled.div`
   padding: 1rem 2rem;
   box-shadow: 0 2px 10px rgba(100, 100, 100, 0.2);
@@ -185,21 +239,20 @@ export const DateAndGuests = styled.div`
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
   }
-    .guest {
-      margin: 0;
-      padding: 0;
-    }
-      .optionContainer {
-        margin: 0.5rem auto;
-        padding: 0.2rem 0.5rem;
-        border: 1px solid gray;
-        border-radius: 5px;
-        color: rgb(150, 150, 150);
-        outline: none;
-      }
-        option {
-          
-        }
+  .guest {
+    margin: 0;
+    padding: 0;
+  }
+  .optionContainer {
+    margin: 0.5rem auto;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid gray;
+    border-radius: 5px;
+    color: rgb(150, 150, 150);
+    outline: none;
+  }
+  option {
+  }
 `;
 export const DateWrapper = styled.div`
   display: flex;

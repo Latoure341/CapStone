@@ -1,5 +1,9 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { DateRangePicker } from "react-date-range";
+
 import NavBar from "../../components/NavBar/NavBar.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import { NavBarContext } from "../../context/NavBarContext.jsx";
@@ -11,12 +15,17 @@ import { IoHomeOutline } from "react-icons/io5";
 import { BsCamera, BsLeaf, BsStars, BsWifi } from "react-icons/bs";
 import { LuRefrigerator } from "react-icons/lu";
 import {
-  PlaceContainer, DateAndGuests,
-  OfferSection, DateWrapper,
+  PlaceContainer,
+  DateAndGuests,
+  AmenityButton,
+  OfferSection,
+  DateWrapper,
   SleepSection,
+  ReviewsContainer,
   OffersWrapper,
   ListingDesc,
   DetailsSecondContainer,
+  CalendarWrapper,
   ListingDetails,
   ImageContainer,
   DetailsWrapper,
@@ -31,40 +40,79 @@ import { useNavigate } from "react-router";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const PlacePreview = () => {
-
   const navigate = useNavigate();
   const { previewNavBar, setPreviewNavBar } = useContext(NavBarContext);
   const { loggedIn, setLoggedIn } = useContext(LogInContext);
   const itemListing = JSON.parse(localStorage.getItem("itemListing"));
 
   const [reservedInfo, setReserverdInfo] = useState({});
-  const [ checkOutDate, setCheckOutDate] =useState("");
-  const [ checkInDate, setCheckInDate ] = useState("");
-  const [ daysDifference, setDaysDifference ] = useState("")
+  const [checkOutDate, setCheckOutDate] = useState("");
+  const [checkInDate, setCheckInDate] = useState("");
+  const [daysDifference, setDaysDifference] = useState(0);
+  const [dateError, setDateError] = useState("");
 
   const bufferImage = itemListing.images[0].data;
   const username = JSON.parse(localStorage.getItem("LoginDetails"));
 
-  //calculate days
-   const calculateDays = () => {
-    if (!checkOutDate|| !checkInDate) return (<p>Error</p>);
+  const formatDateString = (value) => {
+    if (!value) return "";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    return date.toISOString().slice(0, 10);
+  };
 
-    // Convert inputs into Date objects
+  const getValidDate = (value, fallback) => {
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? fallback : date;
+  };
+
+  const selectRange = {
+    startDate: getValidDate(checkInDate, new Date()),
+    endDate: getValidDate(checkOutDate, new Date(Date.now() + 86400000)),
+    key: "selection",
+  };
+
+  const handleSelectionDate = (ranges) => {
+    setCheckInDate(formatDateString(ranges.selection.startDate));
+    setCheckOutDate(formatDateString(ranges.selection.endDate));
+  };
+
+  useEffect(() => {
+    if (!checkInDate || !checkOutDate) {
+      setDateError("");
+      setDaysDifference(0);
+      return;
+    }
+
     const start = new Date(checkInDate);
     const end = new Date(checkOutDate);
 
-    // Calculate the difference in milliseconds
-    const differenceInMs = end - start;
+    if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+      setDateError("Please choose valid check-in and check-out dates.");
+      setDaysDifference(0);
+      return;
+    }
 
-    // Divide by milliseconds in a day: 1000ms * 60s * 60m * 24h
-    const millisecondsPerDay = 1000 * 60 * 60 * 24;
-    const days = Math.floor(differenceInMs / millisecondsPerDay);
-    console.log(days)
+    if (end <= start) {
+      setDateError("Check-out must be later than check-in.");
+      setDaysDifference(0);
+      return;
+    }
 
-    setDaysDifference(days);
-  };
+    setDateError("");
+    setDaysDifference(Math.floor((end - start) / (1000 * 60 * 60 * 24)));
+  }, [checkInDate, checkOutDate]);
+
+  const canReserve = Boolean(
+    checkInDate && checkOutDate && !dateError && daysDifference > 0,
+  );
 
   const reservationHandler = () => {
+    if (!canReserve) {
+      setDateError("Please select valid reservation dates before continuing.");
+      return;
+    }
+
     const payload = {
       BookedBy: username.username,
       property: itemListing.listName,
@@ -77,7 +125,7 @@ const PlacePreview = () => {
       .post(`${apiBaseUrl}/api/reservation/reserve`, payload)
       .then((response) => {
         alert(response.data.message);
-        navigate('/listing');
+        navigate("/listing");
       })
       .catch((error) => {
         console.error("Reservation error:", error);
@@ -142,8 +190,11 @@ const PlacePreview = () => {
               </p>
             </span>
             <span>
-              <img src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" 
-              alt="Picture of the host..." height={70}/>
+              <img
+                src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
+                alt="Picture of the host..."
+                height={70}
+              />
             </span>
           </DetailsWrapper>
           <DetailSubContainer>
@@ -227,35 +278,72 @@ const PlacePreview = () => {
                 </OffersWrapper>
               </div>
             </span>
-            <button>Show all 37 anemities</button>
+            <AmenityButton>Show all 37 anemities</AmenityButton>
           </OfferSection>
 
-          <div>
-            {4} in {itemListing.location}
-            <p>From this date To this date</p>
-            <p>Calenda to select from and set the dats of the nights</p>
-          </div>
+          <CalendarWrapper>
+            <h3>
+              {4} nights in {itemListing.location}
+            </h3>
+            <span className="reserveDates">
+              <p className="date">{checkInDate || "dd/mm/yyyy"}</p>-
+              <p className="date">{checkOutDate || "dd/mm/yyyy"}</p>
+            </span>
+            <div className="calendar">
+              <DateRangePicker
+                ranges={[selectRange]}
+                onChange={handleSelectionDate}
+                calendarFocus="forwards"
+              />
+            </div>
+          </CalendarWrapper>
 
-          <div>
-            <span>
-              <p>⭐</p>
+          <ReviewsContainer>
+            <span className="reviews">
+              <p className="star">⭐</p>
               <p>5.0 · 200 reviews</p>
             </span>
-            <div>
-              <span>Cleanliness, Communication, Checkings</span>
-              <span>Accuracy, Location, Value</span>
+            <div className="anemity">
+              <span>
+                <span className="reviewCategory">
+                  <p>Cleanliness</p>
+                  <p>The Bar 5.0</p>
+                </span>
+                <span className="reviewCategory">
+                  <p>Communication</p>
+                  <p>The Bar 5.0</p>
+                </span>
+                <span className="reviewCategory">
+                  <p>Checkings</p>
+                  <p>The Bar 5.0</p>
+                </span>
+              </span>
+              <span>
+                <span className="reviewCategory">
+                  <p>Accuracy</p>
+                  <p>The Bar 5.0</p>
+                </span>
+                <span className="reviewCategory">
+                  <p>Location</p>
+                  <p>The Bar 5.0</p>
+                </span>
+                <span className="reviewCategory">
+                  <p>Value</p>
+                  <p>The Bar 5.0</p>
+                </span>
+              </span>
             </div>
             <div>
               <span>
                 <span>1</span>
                 <span>2</span>
               </span>
-              <button>Show all other reviews</button>
+              <AmenityButton>Show all other reviews</AmenityButton>
             </div>
             <div>1</div>
             <div>2</div>
             <div>3</div>
-          </div>
+          </ReviewsContainer>
         </DetailsContainer>
 
         <DetailsSecondContainer>
@@ -274,11 +362,7 @@ const PlacePreview = () => {
                   className="input"
                   type="date"
                   value={checkInDate}
-                  onChange={(e) => {
-                    setCheckInDate(e.target.value)
-                    calculateDays();
-                  }}
-                  placeholder="02/02/2026"
+                  onChange={(e) => setCheckInDate(e.target.value)}
                 />
               </span>
               <span className="date-second">
@@ -287,11 +371,7 @@ const PlacePreview = () => {
                   className="input"
                   type="date"
                   value={checkOutDate}
-                  onChange={(e) => {
-                    setCheckOutDate(e.target.value);
-                    calculateDays();
-                  }}
-                  placeholder="02/03/2026"
+                  onChange={(e) => setCheckOutDate(e.target.value)}
                 />
               </span>
             </DateWrapper>
@@ -305,14 +385,21 @@ const PlacePreview = () => {
                 <option>5</option>
               </select>
             </div>
+            {dateError && <p className="date-error">{dateError}</p>}
           </DateAndGuests>
-          <button type="button" onClick={() => reservationHandler()}>
+          <button
+            type="button"
+            onClick={() => reservationHandler()}
+            disabled={!canReserve}
+          >
             Reserve
           </button>
           <p>You won't be charged yet</p>
           <div>
             <span>
-              <p>R{itemListing.price} x {daysDifference || "1"} night</p>
+              <p>
+                R{itemListing.price} x {daysDifference || "1"} night
+              </p>
               <p>R {itemListing.price * Number(daysDifference)}</p>
             </span>
             <span>
@@ -334,7 +421,13 @@ const PlacePreview = () => {
           </div>
           <span>
             <h4>Total</h4>
-            <p>R {( itemListing.price * Number(daysDifference)) + (0.1 * (itemListing.price * Number(daysDifference))) + 175 + (itemListing.price * 0.05)} </p>
+            <p>
+              R{" "}
+              {itemListing.price * Number(daysDifference) +
+                0.1 * (itemListing.price * Number(daysDifference)) +
+                175 +
+                itemListing.price * 0.05}{" "}
+            </p>
           </span>
         </DetailsSecondContainer>
       </PlaceDetailContainer>
