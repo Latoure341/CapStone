@@ -39,12 +39,13 @@ import { MdDryCleaning, MdSecurity } from "react-icons/md";
 import { useNavigate } from "react-router";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
+
+
 const PlacePreview = () => {
   const navigate = useNavigate();
   const { previewNavBar, setPreviewNavBar } = useContext(NavBarContext);
   const { loggedIn, setLoggedIn } = useContext(LogInContext);
   const itemListing = JSON.parse(localStorage.getItem("itemListing"));
-
   const [reservedInfo, setReserverdInfo] = useState({});
   const [checkOutDate, setCheckOutDate] = useState("");
   const [checkInDate, setCheckInDate] = useState("");
@@ -108,11 +109,16 @@ const PlacePreview = () => {
   );
 
   const reservationHandler = () => {
+    const LoggedIn = JSON.parse(localStorage.getItem("Logged In"))
     if (!canReserve) {
       setDateError("Please select valid reservation dates before continuing.");
       return;
     }
-
+    if(!LoggedIn) {
+      alert("Please Logged In First");
+      navigate("/login");
+    }
+    setLoggedIn(true)
     const payload = {
       BookedBy: username.username,
       property: itemListing.listName,

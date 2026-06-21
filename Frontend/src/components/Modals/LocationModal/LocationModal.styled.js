@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const LocationModalContainer = styled.div`
     position: absolute;
     top: 32%;
-    left: 37%;
+    left: 33%;
     transform: translate(-50%, -50%);
     background-color: white;
     color: black;

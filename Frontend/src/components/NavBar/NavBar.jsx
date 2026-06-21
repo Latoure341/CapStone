@@ -20,12 +20,14 @@ import {
 const NavBar = () => {
   const { hotelModal, setHotelModal } = useContext(HotelLocationContext);
   const { previewNavBar, setPreviewNavBar } = useContext(NavBarContext);
+
   const navigate = useNavigate();
 
   const handleHotelSelect = () => {
     setHotelModal(!hotelModal);
   };
   const handleNavigation = () => {
+    localStorage.removeItem("Logged In");
     setPreviewNavBar(false);
     navigate("/")
   }
