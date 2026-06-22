@@ -5,6 +5,7 @@ export const CardContainer = styled.div`
 `;
 
 export const CardSubContainer = styled.div`
+padding-top: 2rem;
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
@@ -141,21 +142,43 @@ export const CardQuestions = styled.div`
 
 export const InspirationCardWrapper = styled.div`
   width: 100%;
+  padding-top: 2rem;
+  .first {
+    text-decoration: underline;
+    text-underline-offset: 11px;
+    text-decoration-thickness: 2px;
+  }
 
   .inspirationCategories {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     gap: 1rem;
 
     border-bottom: 1px solid #ccc;
     padding-bottom: 0.5rem;
   }
-    .inspirationDestinations {
+  .destinationContaiiner {
     display: flex;
-    flex-wrap: wrap;
+    alignt-items: center;
+    justify-content: space-between;
+  }
+  .inspirationDestinations {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
-    align-items: center;
-
+  }
+  .subParagraph {
+    color: gray;
+  }
+    .show {
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
+  p {
+    padding: 0.1rem 0;
+    margin: 0;
+  }
 `;

@@ -171,7 +171,7 @@ export const CalendarWrapper = styled.div`
 export const ReviewsContainer = styled.div`
   border-top: 1px solid gray;
   padding: 0.5rem 0;
-  
+
   .reviews {
     display: flex;
     align-items: center;
@@ -179,21 +179,136 @@ export const ReviewsContainer = styled.div`
     font-weight: 700;
     font-size: 1.2rem;
   }
-    .star {
+  .star {
     margin-top: 0.7rem;
-    }
-    .anemity {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .reviewCategory {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
+  }
+  .anemity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .reviewCategory {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .hostContactSection {
+    padding: 1rem 0;
+    border-top: 1px solid rgb(230, 230, 230);
+  }
+  .hostCard {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.25rem;
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 16px;
+    background: white;
+  }
+  .hostAvatar {
+    min-width: 72px;
+    min-height: 72px;
+    border-radius: 50%;
+    background: rgb(245, 245, 245);
+    display: grid;
+    place-items: center;
+    color: rgb(145, 145, 145);
+    font-size: 3rem;
+  }
+  .hostDetails {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .hostHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hostHeading p {
+    margin: 0;
+    color: rgb(70, 70, 70);
+  }
+  .hostHeading button {
+    border: 1px solid rgb(35, 35, 35);
+    background: transparent;
+    color: rgb(35, 35, 35);
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .hostBadges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    color: rgb(115, 115, 115);
+    font-size: 0.9rem;
+  }
+  .hostBadges span {
+    padding: 0.35rem 0.75rem;
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 999px;
+    background: rgb(250, 250, 250);
+  }
+  .hostDescription {
+    margin: 0;
+    color: rgb(95, 95, 95);
+    line-height: 1.5;
+    max-width: 44rem;
+  }
+  .hostStats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    color: rgb(105, 105, 105);
+    font-size: 0.95rem;
+  }
+  .thingsToKnowSection {
+    margin-top: 1rem;
+  }
+  .thingsToKnowSection h3 {
+    margin: 0 0 1rem 0;
+  }
+  .ruleGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .ruleColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .ruleColumn h4 {
+    margin: 0;
+    font-size: 1rem;
+  }
+  .ruleItem {
+    margin: 0;
+    color: rgb(90, 90, 90);
+    line-height: 1.4;
+    font-size: 0.95rem;
+  }
+  .ruleMore {
+    margin: 0.25rem 0 0;
+    color: rgb(0, 100, 255);
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .hostFooterNote {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgb(230, 230, 230);
+  }
+  .hostFooterNote p {
+    margin: 0;
+    color: rgb(110, 110, 110);
+    font-size: 0.95rem;
+  }
 `;
-
 export const DetailsSecondContainer = styled.div`
   padding: 1rem 2rem;
   box-shadow: 0 2px 10px rgba(100, 100, 100, 0.2);

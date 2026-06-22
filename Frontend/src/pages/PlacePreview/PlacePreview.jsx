@@ -8,7 +8,7 @@ import NavBar from "../../components/NavBar/NavBar.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import { NavBarContext } from "../../context/NavBarContext.jsx";
 import { LogInContext } from "../../context/LogInContext.jsx";
-import { FaKitchenSet, FaRegShareFromSquare } from "react-icons/fa6";
+import { FaKitchenSet, FaRegShareFromSquare, FaUserCircle } from "react-icons/fa6";
 import { CiHeart, CiCalendar } from "react-icons/ci";
 import { SlScreenTablet } from "react-icons/sl";
 import { IoHomeOutline } from "react-icons/io5";
@@ -348,9 +348,71 @@ const PlacePreview = () => {
               </span>
               <AmenityButton>Show all other reviews</AmenityButton>
             </div>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
+            <div className="hostContactSection">
+              <div className="hostCard">
+                <div className="hostAvatar">
+                  <FaUserCircle />
+                </div>
+                <div className="hostDetails">
+                  <div className="hostHeading">
+                    <div>
+                      <p>Hosted by Ghazal</p>
+                      <p>Joined May 2021</p>
+                    </div>
+                    <button type="button">Contact Host</button>
+                  </div>
+                  <div className="hostBadges">
+                    <span>12 Reviews</span>
+                    <span>Identity verified</span>
+                    <span>Superhost</span>
+                  </div>
+                  <p className="hostDescription">
+                    Ghazal is a Superhost. Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.
+                  </p>
+                  <div className="hostStats">
+                    <span>
+                      <strong>Response rate:</strong> 100%
+                    </span>
+                    <span>
+                      <strong>Response time:</strong> within an hour
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="thingsToKnowSection">
+              <h3>Things to know</h3>
+              <div className="ruleGrid">
+                <div className="ruleColumn">
+                  <h4>House rules</h4>
+                  <p className="ruleItem">Check-in: After 4:00 PM</p>
+                  <p className="ruleItem">Checkout: 10:00 AM</p>
+                  <p className="ruleItem">Self check-in with lockbox</p>
+                  <p className="ruleItem">Not suitable for infants (under 2 years)</p>
+                  <p className="ruleItem">No smoking</p>
+                  <p className="ruleMore">Show more</p>
+                </div>
+                <div className="ruleColumn">
+                  <h4>Health & safety</h4>
+                  <p className="ruleItem">Committed to Airbnb’s enhanced cleaning process</p>
+                  <p className="ruleItem">Airbnb’s social-distancing and other COVID-19-related guidelines apply</p>
+                  <p className="ruleItem">Carbon monoxide alarm</p>
+                  <p className="ruleItem">Smoke alarm</p>
+                  <p className="ruleItem">Security Deposit - if you damage the home, you may be charged up to $566</p>
+                  <p className="ruleMore">Show more</p>
+                </div>
+                <div className="ruleColumn">
+                  <h4>Cancellation policy</h4>
+                  <p className="ruleItem">Free cancellation before Feb 14</p>
+                  <p className="ruleMore">Show more</p>
+                </div>
+              </div>
+            </div>
+            <div className="hostFooterNote">
+              <p>
+                To protect your payment, never transfer money or communicate outside of the Airbnb website or app.
+              </p>
+            </div>
           </ReviewsContainer>
         </DetailsContainer>
 

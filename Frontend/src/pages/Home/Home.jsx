@@ -21,7 +21,7 @@ const Home = () => {
         <NavBar />
         {hotelModal && <LocationModal />}
         {guestsModal && <GuestsModal />}
-        <Cta onClick={() => setGuestsModal(false)}/>
+        <Cta />
       </Container>
       <Cards />
       <Footer />

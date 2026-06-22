@@ -6,7 +6,8 @@ import {
   CardSubWrapper,
   CardExperienceWrapper,
   GiftCardWrapper,
-  CardQuestions, InspirationCardWrapper
+  CardQuestions,
+  InspirationCardWrapper,
 } from "./Cards.styled";
 const Cards = () => {
   return (
@@ -112,7 +113,7 @@ const Cards = () => {
           <InspirationCardWrapper>
             <h2>Inspiration for future gateways</h2>
             <div className="inspirationCategories">
-              <span>Destination for art & culture</span>
+              <span className="first">Destination for art & culture</span>
               <span>Destination for outdoor adventure</span>
               <span>Mountain cabins</span>
               <span>Beach destinations</span>
@@ -120,14 +121,65 @@ const Cards = () => {
               <span>Unique stays</span>
             </div>
 
-            <div className="inspirationDestinations">
-              <span>
-                <p>Phoenix</p>
-                <p>Arizona</p>
-              </span>
-              <span>2</span>
-              <span>3</span>
-              <span>4</span>
+            <div className="destinationContaiiner">
+              <div className="inspirationDestinations">
+                <span>
+                  <p>Phoenix</p>
+                  <p className="subParagraph">Arizona</p>
+                </span>
+                <span>
+                  <p>Hot Springs</p>
+                  <p className="subParagraph">Arkansas</p>
+                </span>
+                <span>
+                  <p>Los Angelos</p>
+                  <p className="subParagraph">California</p>
+                </span>
+              </div>
+
+              <div className="inspirationDestinations">
+                <span>
+                  <p>San Francisco</p>
+                  <p className="subParagraph">California</p>
+                </span>
+                <span>
+                  <p>Barcelona</p>
+                  <p className="subParagraph">Catalonia</p>
+                </span>
+                <span>
+                  <p>Praque</p>
+                  <p className="subParagraph">Czechia</p>
+                </span>
+              </div>
+
+              <div className="inspirationDestinations">
+                <span>
+                  <p>Keswick</p>
+                  <p className="subParagraph">England</p>
+                </span>
+                <span>
+                  <p>London</p>
+                  <p className="subParagraph">England</p>
+                </span>
+                <span>
+                  <p>Scarborough</p>
+                  <p className="subParagraph">England</p>
+                </span>
+              </div>
+
+              <div className="inspirationDestinations">
+                <span>
+                  <p>San Diego</p>
+                  <p className="subParagraph">California</p>
+                </span>
+                <span>
+                  <p>Washington</p>
+                  <p className="subParagraph">District Of Columbia</p>
+                </span>
+                <span>
+                  <p className="show">Show More</p>
+                </span>
+              </div>
             </div>
           </InspirationCardWrapper>
         </CardWrapper>
