@@ -7,16 +7,21 @@ import Cards from "../../components/Cards/Cards.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 
 import {HotelLocationContext} from "../../context/HotelLocationContext.jsx";
+import { GuestsContext } from "../../context/GuestsContext.jsx";
+import GuestsModal from "../../components/Modals/GuestsModal/GuestsModal.jsx";
 
 const Home = () => {
 
   const { hotelModal } = useContext(HotelLocationContext);
+  const { guestsModal, setGuestsModal } = useContext(GuestsContext);
+
   return (
     <>
       <Container>
         <NavBar />
         {hotelModal && <LocationModal />}
-        <Cta />
+        {guestsModal && <GuestsModal />}
+        <Cta onClick={() => setGuestsModal(false)}/>
       </Container>
       <Cards />
       <Footer />

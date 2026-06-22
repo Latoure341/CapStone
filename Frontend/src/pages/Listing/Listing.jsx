@@ -24,9 +24,11 @@ import {
   ListingButton,
   DetailsWrapper,
 } from "./Listing.styled.js";
+import { GuestsContext } from "../../context/GuestsContext.jsx";
 
 const Listing = () => {
   const { hotelLocation, setHotelLocation } = useContext(HotelLocationContext);
+  const { guests } = useContext(GuestsContext);
   const { setPreviewNavBar } = useContext(NavBarContext);
   const { setLoggedIn } = useContext(LogInContext);
 
@@ -128,7 +130,7 @@ const Listing = () => {
               </div>
               <div>|</div>
               <div>
-                <p>Add guests</p>
+                <p>{guests} guests</p>
               </div>
               <div>|</div>
               <span>

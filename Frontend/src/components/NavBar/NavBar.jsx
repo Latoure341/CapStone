@@ -16,10 +16,13 @@ import {
   ElementStyle,
   SearchSecondContainer,
 } from "./NavBar.styled.js";
+import { GuestsContext } from "../../context/GuestsContext.jsx";
 
 const NavBar = () => {
   const { hotelModal, setHotelModal } = useContext(HotelLocationContext);
   const { previewNavBar, setPreviewNavBar } = useContext(NavBarContext);
+  const { guestsModal, setGuestsModal, guests } = useContext(GuestsContext);
+  const [logInModal, setLogInModal ] = useState(false);
 
   const navigate = useNavigate();
 
@@ -29,12 +32,22 @@ const NavBar = () => {
   const handleNavigation = () => {
     localStorage.removeItem("Logged In");
     setPreviewNavBar(false);
-    navigate("/")
+    navigate("/");
+  };
+  const handleGuests = (e) => {
+    setGuestsModal(!guestsModal);
+  };
+  const handleLogin = () => {
+    setLogInModal(true);
   }
 
   return (
     <>
-      <NavContainer conditionalstyle = {previewNavBar ? "true" : "false"}>
+      <NavContainer conditionalstyle={previewNavBar ? "true" : "false"} onClick={() => {
+        if(logInModal) {
+          setLogInModal(false);
+        }
+      }}>
         <LogoWrapper onClick={() => handleNavigation()}>
           <Logo className="logo" />
         </LogoWrapper>
@@ -47,10 +60,11 @@ const NavBar = () => {
           <p onClick={() => console.log("Become a host clicked")}>
             Become a host
           </p>
+          {logInModal && (<p className="login" onClick={() => navigate('/login')}>Log In</p>)}
           <CiGlobe />
           <MenuAccount>
             <IoIosMenu />
-            <MdAccountCircle />
+            <MdAccountCircle onClick={handleLogin}/>
           </MenuAccount>
         </NavSecondContainer>
       </NavContainer>
@@ -58,11 +72,20 @@ const NavBar = () => {
       {previewNavBar ? (
         ""
       ) : (
-        <SearchContainer>
+        <SearchContainer
+          onClick={(e) => {
+            if (hotelModal || guestsModal) {
+              setHotelModal(false);
+              setGuestsModal(false);
+            }
+          }}
+        >
           <SearchSecondContainer>
             <div>
               <h6>Hotels</h6>
-              <p onClick={() => handleHotelSelect()}>Select Hotels</p>
+              <p className="hotelSelection" onClick={() => handleHotelSelect()}>
+                Select Hotels
+              </p>
             </div>
             <div>|</div>
             <div>
@@ -81,9 +104,7 @@ const NavBar = () => {
             <div>|</div>
             <div>
               <h6>Guests</h6>
-              <p onClick={() => console.log("Guests")}>
-                0 guests
-              </p>
+              <p onClick={(e) => handleGuests(e)}>{guests || 0} guests</p>
             </div>
             <div>|</div>
             <span>

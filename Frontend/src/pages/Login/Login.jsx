@@ -27,7 +27,13 @@ const Login = () => {
               const data = response.data;
               localStorage.setItem("LoginDetails", JSON.stringify(data))
                 localStorage.setItem("Logged In", JSON.stringify(true));
-                navigate("/listing");
+                if(data.category == "admin"){
+                  alert(data.category)
+                  navigate('/admin');
+                } else {
+                  navigate("/listing");
+                }
+                
             })
             .catch((error) => {
                 console.error("Login error:", error);

@@ -35,12 +35,13 @@ export const login = async (req, res) => {
         }
         const user = await User.findOne({useremail: email});
         const username = user.username;
+        const category = user.category;
         
         if(user){
             const result = await bcrypt.compare(password, user.password);
             if(result) {
                 
-                return res.status(200).json({message: "Login successful", "username": username});
+                return res.status(200).json({message: "Login successful", "username": username, "category": category});
             } else {
                 return res.status(401).json({message: "Invalid credentials"});
             }

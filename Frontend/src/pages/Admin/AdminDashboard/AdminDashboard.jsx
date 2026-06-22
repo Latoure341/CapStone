@@ -25,6 +25,7 @@ const AdminDashboard = () => {
   const [createListing, setCreateListing] = useState(false);
   const [viewReservation, setViewReservation] = useState(false);
   const [viewListing, setViewListing] = useState(true);
+  const [logInModal, setLogInModal ] = useState(false);
 
   const handleViewListing = () => {
     setViewListing(true);
@@ -41,9 +42,18 @@ const AdminDashboard = () => {
     setCreateListing(false);
     setViewReservation(true);
   };
+  const handleLogIn = () => {
+    setLogInModal(true);
+    
+  }
+
   return (
     <>
-      <NavContainer listing="true">
+      <NavContainer listing="true" onClick={() => {
+        if(logInModal) {
+          setLogInModal(false);
+        }
+      }}>
         <LogoWrapper onClick={() => navigate('/')}>
           <Logo className="logo" />
         </LogoWrapper>
@@ -52,7 +62,11 @@ const AdminDashboard = () => {
           <p onClick={() => console.log("Become a host clicked")}>Admin Name</p>
           <MenuAccount>
             <IoIosMenu />
-            <MdAccountCircle />
+            {logInModal && (<p className="login" onClick={() => {
+              localStorage.clear();
+              navigate('/');
+            }} admin="true">Log Out</p>)}
+            <MdAccountCircle  onClick={handleLogIn}/>
           </MenuAccount>
         </NavSecondContainer>
       </NavContainer>

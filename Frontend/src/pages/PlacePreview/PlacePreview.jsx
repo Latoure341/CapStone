@@ -37,6 +37,7 @@ import {
 } from "./PlacePreview.styled.js";
 import { MdDryCleaning, MdSecurity } from "react-icons/md";
 import { useNavigate } from "react-router";
+import { GuestsContext } from "../../context/GuestsContext.jsx";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 
@@ -44,6 +45,7 @@ const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 const PlacePreview = () => {
   const navigate = useNavigate();
   const { previewNavBar, setPreviewNavBar } = useContext(NavBarContext);
+  const { guests } = useContext(GuestsContext);
   const { loggedIn, setLoggedIn } = useContext(LogInContext);
   const itemListing = JSON.parse(localStorage.getItem("itemListing"));
   const [reservedInfo, setReserverdInfo] = useState({});
@@ -384,6 +386,7 @@ const PlacePreview = () => {
             <div className="guestsContainer">
               <h6 className="guest">Guests</h6>
               <select className="optionContainer">
+                <option>{ guests }</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>

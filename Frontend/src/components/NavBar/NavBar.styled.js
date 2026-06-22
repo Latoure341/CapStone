@@ -7,7 +7,8 @@ export const NavContainer = styled.div`
   padding: 0 1rem;
   margin: 0;
   font-weight: 600;
-  box-shadow: ${({conditionalstyle}) => conditionalstyle ? "0px 2px 10px rgb(0, 0, 0, 0.1)" : ""}
+  box-shadow: ${({ conditionalstyle }) =>
+    conditionalstyle ? "0px 2px 10px rgb(0, 0, 0, 0.1)" : ""};
 `;
 
 export const LogoWrapper = styled.svg`
@@ -16,7 +17,7 @@ export const LogoWrapper = styled.svg`
   height: 65px;
   rect {
     fill: transparent;
-  };
+  }
   cursor: pointer;
 `;
 
@@ -26,6 +27,19 @@ export const NavSecondContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   cursor: pointer;
+
+  .login {
+    position: absolute;
+    top: 5.5%;
+    right: 1%;
+
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: ${({ admin }) => admin ? "0.5rem": "1rem"};
+  }
 `;
 
 export const MenuAccount = styled.div`
@@ -53,13 +67,14 @@ export const SearchSecondContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: ${({listing}) => listing ? "0.5rem" : "2rem"};
+  gap: ${({ listing }) => (listing ? "0.5rem" : "2rem")};
   padding: 0.5rem 1rem;
 
   background: white;
   color: black;
   border-radius: 25px;
-  box-shadow: ${({ listing }) =>    listing ? "0 3px 3px rgba(0, 0, 0, 0.1)" : " "};
+  box-shadow: ${({ listing }) =>
+    listing ? "0 3px 3px rgba(0, 0, 0, 0.1)" : " "};
 
   span {
     background-color: rgb(222, 49, 81);
@@ -84,20 +99,20 @@ export const SearchSecondContainer = styled.div`
     padding: 0;
     margin: 0;
   }
-    select {
-      border: none;
-      outline: none;
-      font-size: 0.8rem;
-    }
-      
-      option {
-      border: none;
-      outline: none;
-      font-size: 0.8rem;
-    }
-      option:hover {
-        background-color: lightgray;
-      }
+  select {
+    border: none;
+    outline: none;
+    font-size: 0.8rem;
+  }
+
+  option {
+    border: none;
+    outline: none;
+    font-size: 0.8rem;
+  }
+  option:hover {
+    background-color: lightgray;
+  }
 `;
 
 export const ElementStyle = styled.p`
