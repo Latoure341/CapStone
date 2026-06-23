@@ -1,11 +1,20 @@
 import styled from "styled-components";
+import { media } from "../../styles/theme";
 
 export const CardContainer = styled.div`
   padding: 1rem 2rem;
+
+  ${media.tablet} {
+    padding: 1rem 1.25rem;
+  }
+
+  ${media.mobile} {
+    padding: 1rem 0.75rem;
+  }
 `;
 
 export const CardSubContainer = styled.div`
-padding-top: 2rem;
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
@@ -51,6 +60,17 @@ export const CardSubWrapper = styled.span`
     padding: 0.1rem;
     margin: 0 0 1rem 0;
   }
+
+  ${media.laptop} {
+    width: calc(50% - 0.5rem);
+    min-width: 240px;
+    height: auto;
+  }
+
+  ${media.mobile} {
+    width: 100%;
+    min-width: 0;
+  }
 `;
 
 export const CardExperienceWrapper = styled.span`
@@ -80,6 +100,25 @@ export const CardExperienceWrapper = styled.span`
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
+  }
+
+  ${media.tablet} {
+    width: 100%;
+    height: 45vh;
+  }
+
+  ${media.mobile} {
+    height: 35vh;
+
+    h2 {
+      width: 70%;
+      font-size: 2rem;
+      margin: 2rem 0 0 2rem;
+    }
+
+    button {
+      margin: 0.5rem 0 0 2rem;
+    }
   }
 `;
 
@@ -138,11 +177,40 @@ export const CardQuestions = styled.div`
   button:hover {
     box-shadow: 0 4px 8px rgba(19, 19, 19, 0.81);
   }
+
+  ${media.tablet} {
+    height: 65vh;
+
+    h1 {
+      width: 50%;
+      font-size: 3rem;
+      margin: 3rem 0 3rem 2rem;
+    }
+
+    button {
+      margin: 0 0 0 2rem;
+    }
+  }
+
+  ${media.mobile} {
+    height: 55vh;
+
+    h1 {
+      width: 80%;
+      font-size: 2.3rem;
+      margin: 2rem 0 2rem 1rem;
+    }
+
+    button {
+      margin: 0 0 0 1rem;
+    }
+  }
 `;
 
 export const InspirationCardWrapper = styled.div`
   width: 100%;
   padding-top: 2rem;
+
   .first {
     text-decoration: underline;
     text-underline-offset: 11px;
@@ -160,7 +228,7 @@ export const InspirationCardWrapper = styled.div`
   }
   .destinationContaiiner {
     display: flex;
-    alignt-items: center;
+    align-items: center;
     justify-content: space-between;
   }
   .inspirationDestinations {
@@ -172,13 +240,21 @@ export const InspirationCardWrapper = styled.div`
   .subParagraph {
     color: gray;
   }
-    .show {
-      font-weight: 700;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
+  .show {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
   p {
     padding: 0.1rem 0;
     margin: 0;
+  }
+
+  ${media.tablet} {
+    .inspirationCategories,
+    .destinationContaiiner {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
   }
 `;

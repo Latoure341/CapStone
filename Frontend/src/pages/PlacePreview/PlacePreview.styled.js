@@ -169,8 +169,8 @@ export const CalendarWrapper = styled.div`
     }
 `;
 export const ReviewsContainer = styled.div`
-  border-top: 1px solid gray;
-  padding: 0.5rem 0;
+  padding: 0.5rem 3rem;
+  border-top: 0.5px solid rgb(153, 153, 153);
   .reviewsSummary {
     display: flex;
     align-items: center;

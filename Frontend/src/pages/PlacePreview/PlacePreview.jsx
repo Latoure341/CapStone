@@ -41,8 +41,6 @@ import { GuestsContext } from "../../context/GuestsContext.jsx";
 import { FaRegUserCircle } from "react-icons/fa";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
-
-
 const PlacePreview = () => {
   const navigate = useNavigate();
   const { previewNavBar, setPreviewNavBar } = useContext(NavBarContext);
@@ -112,16 +110,17 @@ const PlacePreview = () => {
   );
 
   const reservationHandler = () => {
-    const LoggedIn = JSON.parse(localStorage.getItem("Logged In"))
+    const LoggedIn = JSON.parse(localStorage.getItem("Logged In"));
     if (!canReserve) {
       setDateError("Please select valid reservation dates before continuing.");
       return;
     }
-    if(!LoggedIn) {
+    if (!LoggedIn) {
       alert("Please Logged In First");
       navigate("/login");
+      return
     }
-    setLoggedIn(true)
+    setLoggedIn(true);
     const payload = {
       BookedBy: username.username,
       property: itemListing.listName,
@@ -306,126 +305,6 @@ const PlacePreview = () => {
               />
             </div>
           </CalendarWrapper>
-
-          <ReviewsContainer>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.4rem 0" }}>
-              <p className="star">⭐</p>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem" }}>
-                <p style={{ fontWeight: 800, margin: 0 }}>5.0</p>
-                <p style={{ margin: 0, color: "rgb(120,120,120)" }}>· 7 reviews</p>
-              </div>
-            </div>
-
-            <div style={{ display: "flex", justifyContent: "space-between", gap: "2rem", padding: "0.5rem 0" }}>
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.8rem" }}>
-                {/* Left metrics column */}
-                {[
-                  ["Cleanliness", "100%", "5.0"],
-                  ["Communication", "100%", "5.0"],
-                  ["Check-in", "100%", "5.0"],
-                ].map(([label, width, score]) => (
-                  <div key={label} style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                    <div style={{ width: 110, color: "rgb(80,80,80)" }}>{label}</div>
-                    <div style={{ flex: 1, height: 6, background: "rgb(230,230,230)", borderRadius: 999, overflow: "hidden" }}>
-                      <div style={{ width, height: "100%", background: "#000" }} />
-                    </div>
-                    <div style={{ width: 36, textAlign: "right", fontWeight: 700 }}>{score}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.8rem" }}>
-                {/* Right metrics column */}
-                {[
-                  ["Accuracy", "100%", "5.0"],
-                  ["Location", "98%", "4.9"],
-                  ["Value", "94%", "4.7"],
-                ].map(([label, width, score]) => (
-                  <div key={label} style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                    <div style={{ width: 110, color: "rgb(80,80,80)" }}>{label}</div>
-                    <div style={{ flex: 1, height: 6, background: "rgb(230,230,230)", borderRadius: 999, overflow: "hidden" }}>
-                      <div style={{ width, height: "100%", background: "#000" }} />
-                    </div>
-                    <div style={{ width: 36, textAlign: "right", fontWeight: 700 }}>{score}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: "0.75rem" }}>
-              <div style={{ display: "flex", gap: "0.5rem" }}>
-                <span style={{ display: "inline-grid", placeItems: "center", width: 28, height: 28, borderRadius: 6, background: "rgb(245,245,245)", fontWeight: 700 }}>1</span>
-                <span style={{ display: "inline-grid", placeItems: "center", width: 28, height: 28, borderRadius: 6 }}>2</span>
-              </div>
-              <AmenityButton>Show all 12 reviews</AmenityButton>
-            </div>
-            
-            <div className="hostContactSection">
-              <div className="hostCard">
-                <div className="hostAvatar">
-                  <FaRegUserCircle />
-                </div>
-                <div className="hostDetails">
-                  <div className="hostHeading">
-                    <div>
-                      <p>Hosted by Ghazal</p>
-                      <p>Joined May 2021</p>
-                    </div>
-                    <button type="button">Contact Host</button>
-                  </div>
-                  <div className="hostBadges">
-                    <span>12 Reviews</span>
-                    <span>Identity verified</span>
-                    <span>Superhost</span>
-                  </div>
-                  <p className="hostDescription">
-                    Ghazal is a Superhost. Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.
-                  </p>
-                  <div className="hostStats">
-                    <span>
-                      <strong>Response rate:</strong> 100%
-                    </span>
-                    <span>
-                      <strong>Response time:</strong> within an hour
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="thingsToKnowSection">
-              <h3>Things to know</h3>
-              <div className="ruleGrid">
-                <div className="ruleColumn">
-                  <h4>House rules</h4>
-                  <p className="ruleItem">Check-in: After 4:00 PM</p>
-                  <p className="ruleItem">Checkout: 10:00 AM</p>
-                  <p className="ruleItem">Self check-in with lockbox</p>
-                  <p className="ruleItem">Not suitable for infants (under 2 years)</p>
-                  <p className="ruleItem">No smoking</p>
-                  <p className="ruleMore">Show more</p>
-                </div>
-                <div className="ruleColumn">
-                  <h4>Health & safety</h4>
-                  <p className="ruleItem">Committed to Airbnb’s enhanced cleaning process</p>
-                  <p className="ruleItem">Airbnb’s social-distancing and other COVID-19-related guidelines apply</p>
-                  <p className="ruleItem">Carbon monoxide alarm</p>
-                  <p className="ruleItem">Smoke alarm</p>
-                  <p className="ruleItem">Security Deposit - if you damage the home, you may be charged up to $566</p>
-                  <p className="ruleMore">Show more</p>
-                </div>
-                <div className="ruleColumn">
-                  <h4>Cancellation policy</h4>
-                  <p className="ruleItem">Free cancellation before Feb 14</p>
-                  <p className="ruleMore">Show more</p>
-                </div>
-              </div>
-            </div>
-            <div className="hostFooterNote">
-              <p>
-                To protect your payment, never transfer money or communicate outside of the Airbnb website or app.
-              </p>
-            </div>
-          </ReviewsContainer>
         </DetailsContainer>
 
         <DetailsSecondContainer>
@@ -460,7 +339,7 @@ const PlacePreview = () => {
             <div className="guestsContainer">
               <h6 className="guest">Guests</h6>
               <select className="optionContainer">
-                <option>{ guests }</option>
+                <option>{guests}</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -515,6 +394,226 @@ const PlacePreview = () => {
         </DetailsSecondContainer>
       </PlaceDetailContainer>
 
+      <ReviewsContainer>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.6rem",
+            padding: "0.4rem 0",
+          }}
+        >
+          <p className="star">⭐</p>
+          <div
+            style={{ display: "flex", alignItems: "baseline", gap: "0.4rem" }}
+          >
+            <p style={{ fontWeight: 800, margin: 0 }}>5.0</p>
+            <p style={{ margin: 0, color: "rgb(120,120,120)" }}>· 7 reviews</p>
+          </div>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            gap: "2rem",
+            padding: "0.5rem 0",
+          }}
+        >
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.8rem",
+            }}
+          >
+            {/* Left metrics column */}
+            {[
+              ["Cleanliness", "100%", "5.0"],
+              ["Communication", "100%", "5.0"],
+              ["Check-in", "100%", "5.0"],
+            ].map(([label, width, score]) => (
+              <div
+                key={label}
+                style={{ display: "flex", alignItems: "center", gap: "1rem" }}
+              >
+                <div style={{ width: 110, color: "rgb(80,80,80)" }}>
+                  {label}
+                </div>
+                <div
+                  style={{
+                    flex: 1,
+                    height: 6,
+                    background: "rgb(230,230,230)",
+                    borderRadius: 999,
+                    overflow: "hidden",
+                  }}
+                >
+                  <div style={{ width, height: "100%", background: "#000" }} />
+                </div>
+                <div style={{ width: 36, textAlign: "right", fontWeight: 700 }}>
+                  {score}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.8rem",
+            }}
+          >
+            {/* Right metrics column */}
+            {[
+              ["Accuracy", "100%", "5.0"],
+              ["Location", "98%", "4.9"],
+              ["Value", "94%", "4.7"],
+            ].map(([label, width, score]) => (
+              <div
+                key={label}
+                style={{ display: "flex", alignItems: "center", gap: "1rem" }}
+              >
+                <div style={{ width: 110, color: "rgb(80,80,80)" }}>
+                  {label}
+                </div>
+                <div
+                  style={{
+                    flex: 1,
+                    height: 6,
+                    background: "rgb(230,230,230)",
+                    borderRadius: 999,
+                    overflow: "hidden",
+                  }}
+                >
+                  <div style={{ width, height: "100%", background: "#000" }} />
+                </div>
+                <div style={{ width: 36, textAlign: "right", fontWeight: 700 }}>
+                  {score}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingTop: "0.75rem",
+          }}
+        >
+          <div style={{ display: "flex", gap: "0.5rem" }}>
+            <span
+              style={{
+                display: "inline-grid",
+                placeItems: "center",
+                width: 28,
+                height: 28,
+                borderRadius: 6,
+                background: "rgb(245,245,245)",
+                fontWeight: 700,
+              }}
+            >
+              1
+            </span>
+            <span
+              style={{
+                display: "inline-grid",
+                placeItems: "center",
+                width: 28,
+                height: 28,
+                borderRadius: 6,
+              }}
+            >
+              2
+            </span>
+          </div>
+          <AmenityButton>Show all 12 reviews</AmenityButton>
+        </div>
+
+        <div className="hostContactSection">
+          <div className="hostCard">
+            <div className="hostAvatar">
+              <FaRegUserCircle />
+            </div>
+            <div className="hostDetails">
+              <div className="hostHeading">
+                <div>
+                  <p>Hosted by Eric</p>
+                  <p>Joined May 2025</p>
+                </div>
+                <button type="button">Contact Host</button>
+              </div>
+              <div className="hostBadges">
+                <span>12 Reviews</span>
+                <span>Identity verified</span>
+                <span>Superhost</span>
+              </div>
+              <p className="hostDescription">
+                Eric is a Superhost. Superhosts are experienced, highly rated
+                hosts who are committed to providing great stays for guests.
+              </p>
+              <div className="hostStats">
+                <span>
+                  <strong>Response rate:</strong> 100%
+                </span>
+                <span>
+                  <strong>Response time:</strong> within an hour
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="thingsToKnowSection">
+          <h3>Things to know</h3>
+          <div className="ruleGrid">
+            <div className="ruleColumn">
+              <h4>House rules</h4>
+              <p className="ruleItem">Check-in: After 4:00 PM</p>
+              <p className="ruleItem">Checkout: 10:00 AM</p>
+              <p className="ruleItem">Self check-in with lockbox</p>
+              <p className="ruleItem">
+                Not suitable for infants (under 2 years)
+              </p>
+              <p className="ruleItem">No smoking</p>
+              <p className="ruleMore">Show more</p>
+            </div>
+            <div className="ruleColumn">
+              <h4>Health & safety</h4>
+              <p className="ruleItem">
+                Committed to Airbnb’s enhanced cleaning process
+              </p>
+              <p className="ruleItem">
+                Airbnb’s social-distancing and other COVID-19-related guidelines
+                apply
+              </p>
+              <p className="ruleItem">Carbon monoxide alarm</p>
+              <p className="ruleItem">Smoke alarm</p>
+              <p className="ruleItem">
+                Security Deposit - if you damage the home, you may be charged up
+                to $566
+              </p>
+              <p className="ruleMore">Show more</p>
+            </div>
+            <div className="ruleColumn">
+              <h4>Cancellation policy</h4>
+              <p className="ruleItem">Free cancellation before Feb 14</p>
+              <p className="ruleMore">Show more</p>
+            </div>
+          </div>
+        </div>
+        <div className="hostFooterNote">
+          <p>
+            To protect your payment, never transfer money or communicate outside
+            of the Airbnb website or app.
+          </p>
+        </div>
+      </ReviewsContainer>
       <Footer />
     </>
   );

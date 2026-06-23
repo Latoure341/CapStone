@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "../../styles/theme";
 
 export const NavContainer = styled.div`
   display: flex;
@@ -7,8 +8,25 @@ export const NavContainer = styled.div`
   padding: 0 1rem;
   margin: 0;
   font-weight: 600;
+  gap: 0.75rem;
   box-shadow: ${({ conditionalstyle }) =>
     conditionalstyle ? "0px 2px 10px rgb(0, 0, 0, 0.1)" : ""};
+
+  ${media.laptop} {
+    padding: 0 0.75rem;
+  }
+
+  ${media.tablet} {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+  }
+
+  ${media.mobile} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 `;
 
 export const LogoWrapper = styled.svg`
@@ -19,6 +37,10 @@ export const LogoWrapper = styled.svg`
     fill: transparent;
   }
   cursor: pointer;
+
+  ${media.mobile} {
+    height: 50px;
+  }
 `;
 
 export const NavSecondContainer = styled.div`
@@ -27,6 +49,17 @@ export const NavSecondContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   cursor: pointer;
+
+  ${media.tablet} {
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  ${media.mobile} {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
 
   .login {
     position: absolute;
@@ -38,7 +71,14 @@ export const NavSecondContainer = styled.div`
     color: black;
     padding: 0.5rem 1rem;
     border-radius: 8px;
-    font-size: ${({ admin }) => admin ? "0.5rem": "1rem"};
+    font-size: ${({ admin }) => (admin ? "0.5rem" : "1rem")};
+
+    ${media.mobile} {
+      position: static;
+      top: auto;
+      right: auto;
+      font-size: 0.9rem;
+    }
   }
 `;
 
@@ -53,14 +93,26 @@ export const MenuAccount = styled.div`
   font-size: 1.4rem;
   padding: 0.3rem 0.8rem;
   border-radius: 10px;
+
+  ${media.mobile} {
+    padding: 0.25rem 0.6rem;
+    font-size: 1.2rem;
+  }
 `;
 
 export const SearchContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   padding: 1rem;
+
+  ${media.tablet} {
+    padding: 0.75rem;
+  }
+
+  ${media.mobile} {
+    padding: 0.75rem 0.5rem;
+  }
 `;
 
 export const SearchSecondContainer = styled.div`
@@ -75,6 +127,23 @@ export const SearchSecondContainer = styled.div`
   border-radius: 25px;
   box-shadow: ${({ listing }) =>
     listing ? "0 3px 3px rgba(0, 0, 0, 0.1)" : " "};
+  flex-wrap: wrap;
+
+  ${media.laptop} {
+    gap: ${({ listing }) => (listing ? "0.3rem" : "1rem")};
+  }
+
+  ${media.tablet} {
+    gap: 0.5rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  ${media.mobile} {
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 16px;
+    width: 100%;
+  }
 
   span {
     background-color: rgb(222, 49, 81);
@@ -86,6 +155,10 @@ export const SearchSecondContainer = styled.div`
   }
   div {
     padding: 0.2rem 0.2rem;
+
+    ${media.mobile} {
+      width: 100%;
+    }
   }
 
   p {
@@ -117,6 +190,15 @@ export const SearchSecondContainer = styled.div`
 
 export const ElementStyle = styled.p`
   font-weight: 500;
+
+  ${media.tablet} {
+    font-size: 0.95rem;
+  }
+
+  ${media.mobile} {
+    display: none;
+  }
+
   &:hover {
     text-decoration: underline solid white 0.2em;
     text-underline-offset: 8px;
