@@ -8,7 +8,7 @@ import NavBar from "../../components/NavBar/NavBar.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import { NavBarContext } from "../../context/NavBarContext.jsx";
 import { LogInContext } from "../../context/LogInContext.jsx";
-import { FaKitchenSet, FaRegShareFromSquare, FaUserCircle } from "react-icons/fa6";
+import { FaKitchenSet, FaRegShareFromSquare } from "react-icons/fa6";
 import { CiHeart, CiCalendar } from "react-icons/ci";
 import { SlScreenTablet } from "react-icons/sl";
 import { IoHomeOutline } from "react-icons/io5";
@@ -38,6 +38,7 @@ import {
 import { MdDryCleaning, MdSecurity } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { GuestsContext } from "../../context/GuestsContext.jsx";
+import { FaRegUserCircle } from "react-icons/fa";
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 
@@ -351,7 +352,7 @@ const PlacePreview = () => {
             <div className="hostContactSection">
               <div className="hostCard">
                 <div className="hostAvatar">
-                  <FaUserCircle />
+                  <FaRegUserCircle />
                 </div>
                 <div className="hostDetails">
                   <div className="hostHeading">
