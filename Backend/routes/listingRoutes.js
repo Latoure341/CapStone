@@ -1,21 +1,20 @@
-const express = require("express");
-const multer = require("multer");
-const {
+import express from 'express';
+import multer from 'multer';
+import {
   createListing,
   getAllListings,
   getListingById,
   updateListing,
   deleteListing,
-} = require("../controllers/listingController");
+} from '../controllers/listingController.js';
 
 const router = express.Router();
 
-// Configure multer for image uploads (memory storage for database)
 const storage = multer.memoryStorage();
 
 const upload = multer({
   storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit per file
+  limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const allowedMimes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
     if (allowedMimes.includes(file.mimetype)) {
@@ -26,11 +25,10 @@ const upload = multer({
   },
 });
 
-// Routes
 router.post("/", upload.array("images", 10), createListing);
 router.get("/", getAllListings);
 router.get("/:id", getListingById);
 router.put("/:id", upload.array("images", 10), updateListing);
 router.delete("/delete", deleteListing);
 
-module.exports = router;
+export default router;

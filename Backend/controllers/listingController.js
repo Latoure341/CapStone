@@ -1,11 +1,9 @@
-const Listing = require("../models/listingModel");
+import Listing from "../models/listingModel.js";
 
-// Create a new listing
-const createListing = async (req, res) => {
+export const createListing = async (req, res) => {
   try {
     const { listName, location, description, rooms, baths, guests, price, amenities, theType, rating } = req.body;
 
-    // Validate required fields
     if (!listName || !location || !description || !price) {
       return res.status(400).json({ error: "Missing required fields" });
     }
@@ -14,13 +12,11 @@ const createListing = async (req, res) => {
       return res.status(400).json({ error: "No images uploaded" });
     }
 
-    // Convert uploaded files to base64
-    const images = req.files.map(file => ({
+    const images = req.files.map((file) => ({
       filename: file.originalname,
       data: file.buffer.toString("base64"),
     }));
 
-    // Parse amenities if it's a string (comes as JSON string from FormData)
     let parsedAmenities = [];
     if (amenities) {
       try {
@@ -30,7 +26,6 @@ const createListing = async (req, res) => {
       }
     }
 
-    // Create new listing
     const newListing = new Listing({
       listName,
       location,
@@ -45,7 +40,6 @@ const createListing = async (req, res) => {
       images,
     });
 
-    // Save to database
     const savedListing = await newListing.save();
 
     res.status(201).json({
@@ -58,24 +52,19 @@ const createListing = async (req, res) => {
   }
 };
 
-// Get all listings
-const getAllListings = async (req, res) => {
+export const getAllListings = async (req, res) => {
   try {
     const listings = await Listing.find();
-    res.status(200).json(
-      listings
-    );
+    res.status(200).json(listings);
   } catch (error) {
     console.error("Error fetching listings:", error);
     res.status(500).json({ error: "Failed to fetch listings", details: error.message });
   }
 };
 
-// Get a specific listing by ID
-const getListingById = async (req, res) => {
+export const getListingById = async (req, res) => {
   try {
     const { id } = req.params;
-
     const listing = await Listing.findById(id);
 
     if (!listing) {
@@ -92,29 +81,24 @@ const getListingById = async (req, res) => {
   }
 };
 
-// Update a listing
-const updateListing = async (req, res) => {
+export const updateListing = async (req, res) => {
   try {
     const { id } = req.params;
     const { listName, location, description, rooms, baths, guests, price, amenities, theType, rating } = req.body;
 
-    // Find listing
     const listing = await Listing.findById(id);
-
     if (!listing) {
       return res.status(404).json({ error: "Listing not found" });
     }
 
-    // Handle new images if uploaded
     let images = listing.images;
     if (req.files && req.files.length > 0) {
-      images = req.files.map(file => ({
+      images = req.files.map((file) => ({
         filename: file.originalname,
         data: file.buffer.toString("base64"),
       }));
     }
 
-    // Parse amenities if it's a string
     let parsedAmenities = amenities;
     if (amenities && typeof amenities === "string") {
       try {
@@ -124,7 +108,6 @@ const updateListing = async (req, res) => {
       }
     }
 
-    // Update listing
     const updatedListing = await Listing.findByIdAndUpdate(
       id,
       {
@@ -154,19 +137,16 @@ const updateListing = async (req, res) => {
   }
 };
 
-// Delete a listing
-const deleteListing = async (req, res) => {
+export const deleteListing = async (req, res) => {
   try {
     const { listName } = req.body;
-
-    const listing = await Listing.findOne(listName);
+    const listing = await Listing.findOne({ listName });
 
     if (!listing) {
       return res.status(404).json({ error: "Listing not found" });
     }
 
-    // Delete listing from database (images are stored in DB, no file cleanup needed)
-    await Listing.findOneAndDelete(listName);
+    await Listing.findOneAndDelete({ listName });
 
     res.status(200).json({
       message: "Listing deleted successfully",
@@ -175,12 +155,4 @@ const deleteListing = async (req, res) => {
     console.error("Error deleting listing:", error);
     res.status(500).json({ error: "Failed to delete listing", details: error.message });
   }
-};
-
-module.exports = {
-  createListing,
-  getAllListings,
-  getListingById,
-  updateListing,
-  deleteListing,
 };

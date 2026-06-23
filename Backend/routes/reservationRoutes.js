@@ -1,9 +1,10 @@
-const { postReservation, reservedPlace, removeReservation } = require('../controllers/reservationController.js');
-const express = require('express');
+import express from 'express';
+import { postReservation, reservedPlace, removeReservation } from '../controllers/reservationController.js';
+
 const router = express.Router();
 
-router.post("/reserve", postReservation);
-router.get("/reservedPlace", reservedPlace)
-router.delete("/delete", removeReservation)
+router.post('/reserve', postReservation);
+router.get('/reservedPlace', reservedPlace);
+router.delete('/delete', removeReservation);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const listingModelSchema = new mongoose.Schema({
   listName: { type: String, required: true },
@@ -11,12 +11,14 @@ const listingModelSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   amenities: { type: [String], default: [] },
   theType: { type: String, default: "Entire Home" },
-  images: [{
-    filename: { type: String },
-    data: { type: String, required: true }, // Base64 encoded image data
-  }],
+  images: [
+    {
+      filename: { type: String },
+      data: { type: String, required: true },
+    },
+  ],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model("Listing", listingModelSchema);
+export default mongoose.model("Listing", listingModelSchema);

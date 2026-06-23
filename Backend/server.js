@@ -1,33 +1,31 @@
-const dotenv = require("dotenv");
-const express = require("express");
-const mongoose = require("mongoose");
-const dns = require("dns");
-const cors = require("cors");
+import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
+import dns from "dns";
+import cors from "cors";
 
-//Routes
-const userRoutes = require("./routes/userRoutes");
-const listingRoutes = require("./routes/listingRoutes");
-const reservationRoutes = require("./routes/reservationRoutes")
+import userRoutes from "./routes/userRoutes.js";
+import listingRoutes from "./routes/listingRoutes.js";
+import reservationRoutes from "./routes/reservationRoutes.js";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-// CORS
 const allowedOriginsEnv = process.env.CORS_ORIGIN;
 const allowedOrigins = allowedOriginsEnv
-  .split(",")
+  ?.split(",")
   .map((origin) => origin.trim())
-  .filter(Boolean);
+  .filter(Boolean) ?? [];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (allowedOrigins) {
-        callback(null, true);
-      } else {
+      if (allowedOrigins.length === 0) {
         callback(new Error("Not allowed by CORS"));
+      } else {
+        callback(null, true);
       }
     },
     credentials: true,
@@ -36,17 +34,14 @@ app.use(
 
 app.use(express.json());
 
-// Routes
 app.use("/api/user", userRoutes);
 app.use("/api/listings", listingRoutes);
-app.use("/api/reservation", reservationRoutes)
+app.use("/api/reservation", reservationRoutes);
 
-// Health route
 app.get("/", (req, res) => {
   res.status(200).send("API is running...");
 });
 
-// Database connection
 const mongoUrl = process.env.MONGO_URL;
 console.log(mongoUrl);
 
@@ -54,7 +49,6 @@ if (!mongoUrl) {
   throw new Error("MONGO_URL is not set in environment variables");
 }
 
-// Handle unmatched routes
 app.use((req, res) => {
   res.status(404).json({
     success: false,

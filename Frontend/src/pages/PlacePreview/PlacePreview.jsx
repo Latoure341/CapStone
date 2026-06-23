@@ -308,47 +308,58 @@ const PlacePreview = () => {
           </CalendarWrapper>
 
           <ReviewsContainer>
-            <span className="reviews">
+            <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.4rem 0" }}>
               <p className="star">⭐</p>
-              <p>5.0 · 200 reviews</p>
-            </span>
-            <div className="anemity">
-              <span>
-                <span className="reviewCategory">
-                  <p>Cleanliness</p>
-                  <p>The Bar 5.0</p>
-                </span>
-                <span className="reviewCategory">
-                  <p>Communication</p>
-                  <p>The Bar 5.0</p>
-                </span>
-                <span className="reviewCategory">
-                  <p>Checkings</p>
-                  <p>The Bar 5.0</p>
-                </span>
-              </span>
-              <span>
-                <span className="reviewCategory">
-                  <p>Accuracy</p>
-                  <p>The Bar 5.0</p>
-                </span>
-                <span className="reviewCategory">
-                  <p>Location</p>
-                  <p>The Bar 5.0</p>
-                </span>
-                <span className="reviewCategory">
-                  <p>Value</p>
-                  <p>The Bar 5.0</p>
-                </span>
-              </span>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem" }}>
+                <p style={{ fontWeight: 800, margin: 0 }}>5.0</p>
+                <p style={{ margin: 0, color: "rgb(120,120,120)" }}>· 7 reviews</p>
+              </div>
             </div>
-            <div>
-              <span>
-                <span>1</span>
-                <span>2</span>
-              </span>
-              <AmenityButton>Show all other reviews</AmenityButton>
+
+            <div style={{ display: "flex", justifyContent: "space-between", gap: "2rem", padding: "0.5rem 0" }}>
+              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.8rem" }}>
+                {/* Left metrics column */}
+                {[
+                  ["Cleanliness", "100%", "5.0"],
+                  ["Communication", "100%", "5.0"],
+                  ["Check-in", "100%", "5.0"],
+                ].map(([label, width, score]) => (
+                  <div key={label} style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                    <div style={{ width: 110, color: "rgb(80,80,80)" }}>{label}</div>
+                    <div style={{ flex: 1, height: 6, background: "rgb(230,230,230)", borderRadius: 999, overflow: "hidden" }}>
+                      <div style={{ width, height: "100%", background: "#000" }} />
+                    </div>
+                    <div style={{ width: 36, textAlign: "right", fontWeight: 700 }}>{score}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.8rem" }}>
+                {/* Right metrics column */}
+                {[
+                  ["Accuracy", "100%", "5.0"],
+                  ["Location", "98%", "4.9"],
+                  ["Value", "94%", "4.7"],
+                ].map(([label, width, score]) => (
+                  <div key={label} style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                    <div style={{ width: 110, color: "rgb(80,80,80)" }}>{label}</div>
+                    <div style={{ flex: 1, height: 6, background: "rgb(230,230,230)", borderRadius: 999, overflow: "hidden" }}>
+                      <div style={{ width, height: "100%", background: "#000" }} />
+                    </div>
+                    <div style={{ width: 36, textAlign: "right", fontWeight: 700 }}>{score}</div>
+                  </div>
+                ))}
+              </div>
             </div>
+
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: "0.75rem" }}>
+              <div style={{ display: "flex", gap: "0.5rem" }}>
+                <span style={{ display: "inline-grid", placeItems: "center", width: 28, height: 28, borderRadius: 6, background: "rgb(245,245,245)", fontWeight: 700 }}>1</span>
+                <span style={{ display: "inline-grid", placeItems: "center", width: 28, height: 28, borderRadius: 6 }}>2</span>
+              </div>
+              <AmenityButton>Show all 12 reviews</AmenityButton>
+            </div>
+            
             <div className="hostContactSection">
               <div className="hostCard">
                 <div className="hostAvatar">

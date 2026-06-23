@@ -171,26 +171,65 @@ export const CalendarWrapper = styled.div`
 export const ReviewsContainer = styled.div`
   border-top: 1px solid gray;
   padding: 0.5rem 0;
-
-  .reviews {
+  .reviewsSummary {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0 1rem 0;
+  }
+  .reviewsSummary .left {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-weight: 700;
-    font-size: 1.2rem;
   }
-  .star {
-    margin-top: 0.7rem;
+  .reviewsSummary .rating {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0;
   }
-  .anemity {
+  .reviewsSummary .count {
+    color: rgb(120,120,120);
+    margin: 0;
+  }
+
+  .metricsGrid {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .reviewCategory {
-    display: flex;
-    align-items: center;
     gap: 2rem;
+    padding: 0.5rem 0 1rem 0;
+  }
+  .metricsColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    min-width: 320px;
+  }
+  .metric {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .label {
+    width: 110px;
+    color: rgb(80,80,80);
+    font-weight: 500;
+  }
+  .bar {
+    flex: 1;
+    height: 6px;
+    background: rgb(230,230,230);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .barFill {
+    height: 100%;
+    background: rgb(0,0,0);
+    border-radius: 999px;
+  }
+  .score {
+    width: 36px;
+    text-align: right;
+    color: rgb(70,70,70);
+    font-weight: 700;
   }
   .hostContactSection {
     padding: 1rem 0;
@@ -307,6 +346,31 @@ export const ReviewsContainer = styled.div`
     margin: 0;
     color: rgb(110, 110, 110);
     font-size: 0.95rem;
+  }
+
+  .reviewsFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+  }
+  .pagination {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .page {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 6px;
+    color: rgb(80,80,80);
+    cursor: pointer;
+  }
+  .page.active {
+    background: rgb(245,245,245);
+    font-weight: 700;
   }
 `;
 export const DetailsSecondContainer = styled.div`

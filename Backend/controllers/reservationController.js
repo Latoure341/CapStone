@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import Reservations from "../models/reservationModel.js";
 
 export const postReservation = async (req, res) => {
