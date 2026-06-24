@@ -139,10 +139,9 @@ export const SearchSecondContainer = styled.div`
   }
 
   ${media.mobile} {
-    flex-direction: column;
-    align-items: stretch;
-    border-radius: 16px;
-    width: 100%;
+  gap: 0.1rem;
+    padding: 0.5rem;
+  widht: 100%;
   }
 
   span {
@@ -157,7 +156,8 @@ export const SearchSecondContainer = styled.div`
     padding: 0.2rem 0.2rem;
 
     ${media.mobile} {
-      width: 100%;
+    padding: 0;
+      width: 80%;
     }
   }
 
@@ -167,6 +167,9 @@ export const SearchSecondContainer = styled.div`
     padding: 0;
     margin: 0.1rem 0;
     cursor: pointer;
+    ${media.mobile} {
+      font-size: 0.5rem;
+    }
   }
   h6 {
     padding: 0;

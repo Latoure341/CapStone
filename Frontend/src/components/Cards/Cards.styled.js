@@ -254,7 +254,14 @@ export const InspirationCardWrapper = styled.div`
     .inspirationCategories,
     .destinationContaiiner {
       flex-wrap: wrap;
-      justify-content: flex-start;
+      align-items: center;
+    justify-content: space-between;
     }
+    .subParagraph, p {
+      font-size: 13px;
+    }
+      span {
+        font-size: 14px;
+      }
   }
 `;

@@ -15,13 +15,16 @@ import {
   ElementStyle,
   LogoWrapper,
 } from "../../../components/NavBar/NavBar.styled.js";
+import { NavBarContext } from "../../../context/NavBarContext.jsx";
 import { ListingButton } from "../../Listing/Listing.styled.js";
 import { ListingButtonsContainer } from "./AdminDashboard.styled.js";
 import ViewReservation from "../Reservation/ViewReservation.jsx";
 import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
+
   const navigate = useNavigate();
+  const { setPreviewNavBar } = useContext(NavBarContext);
   const [createListing, setCreateListing] = useState(false);
   const [viewReservation, setViewReservation] = useState(false);
   const [viewListing, setViewListing] = useState(true);
@@ -54,7 +57,10 @@ const AdminDashboard = () => {
           setLogInModal(false);
         }
       }}>
-        <LogoWrapper onClick={() => navigate('/')}>
+        <LogoWrapper onClick={() => {
+          setPreviewNavBar(false);
+          navigate('/')
+          }}>
           <Logo className="logo" />
         </LogoWrapper>
 
@@ -64,6 +70,7 @@ const AdminDashboard = () => {
             <IoIosMenu />
             {logInModal && (<p className="login" onClick={() => {
               localStorage.clear();
+              setPreviewNavBar(false);
               navigate('/');
             }} admin="true">Log Out</p>)}
             <MdAccountCircle  onClick={handleLogIn}/>

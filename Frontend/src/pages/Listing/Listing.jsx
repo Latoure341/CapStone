@@ -130,7 +130,7 @@ const Listing = () => {
               </div>
               <div>|</div>
               <div>
-                <p>{guests} guests</p>
+                <p>{guests || 0} guests</p>
               </div>
               <div>|</div>
               <span>
