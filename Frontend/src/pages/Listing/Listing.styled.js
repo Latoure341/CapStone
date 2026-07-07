@@ -128,6 +128,7 @@ export const DetailsWrapper = styled.span`
   gap: 0.5rem;
   justify-content: center;
   min-width: 0;
+  margin-bottom: 0.5rem;
 
   span {
     border-bottom: 1px solid #ddd;

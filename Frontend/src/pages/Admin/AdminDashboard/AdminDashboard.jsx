@@ -65,7 +65,9 @@ const AdminDashboard = () => {
         </LogoWrapper>
 
         <NavSecondContainer>
-          <p onClick={() => console.log("Become a host clicked")}>Admin Name</p>
+          <p>{
+            JSON.parse(localStorage.getItem("LoginDetails")).user.username
+            }</p>
           <MenuAccount>
             <IoIosMenu />
             {logInModal && (<p className="login" onClick={() => {

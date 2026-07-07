@@ -7,6 +7,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { CiGlobe, CiSearch } from "react-icons/ci";
 import { HotelLocationContext } from "../../context/HotelLocationContext.jsx";
 import { NavBarContext } from "../../context/NavBarContext.jsx";
+import { LogInContext } from "../../context/LogInContext.jsx";
 import {
   NavContainer,
   NavSecondContainer,
@@ -22,6 +23,7 @@ const NavBar = () => {
   const { hotelModal, setHotelModal } = useContext(HotelLocationContext);
   const { previewNavBar, setPreviewNavBar } = useContext(NavBarContext);
   const { guestsModal, setGuestsModal, guests } = useContext(GuestsContext);
+  const { loggedIn, setLoggedIn } = useContext(LogInContext);
   const [logInModal, setLogInModal ] = useState(false);
 
   const navigate = useNavigate();
@@ -40,8 +42,16 @@ const NavBar = () => {
   const handleLogin = () => {
     setLogInModal(true);
   }
-
+  const reservationHandler = () => {
+      if(JSON.parse(localStorage.getItem("LoginDetails")).user.category == "admin"){
+        navigate('/admin');
+      }
+      else {
+        navigate("/")
+      }
+    }
   return (
+
     <>
       <NavContainer conditionalstyle={previewNavBar ? "true" : "false"} onClick={() => {
         if(logInModal) {
@@ -60,7 +70,18 @@ const NavBar = () => {
           <p onClick={() => console.log("Become a host clicked")}>
             Become a host
           </p>
-          {logInModal && (<p className="login" onClick={() => navigate('/login')}>Log In</p>)}
+          {logInModal && (<p className="login">
+            {
+              loggedIn ? <span onClick={() => {
+                localStorage.clear();
+                setLoggedIn(false);
+                navigate('/');
+              }}>Log Out</span>: <span onClick={() => navigate('/login')}>Log In</span>
+            } <br/> 
+            {
+              loggedIn && <span onClick={() => reservationHandler()}>Reservations</span>
+            }
+          </p>)}
           <CiGlobe />
           <MenuAccount>
             <IoIosMenu />

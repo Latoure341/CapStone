@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "../../../styles/theme.js";
 
 export const GuestsContainer = styled.div`
   padding: 0.5rem 1rem;

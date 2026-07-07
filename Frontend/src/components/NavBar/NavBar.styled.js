@@ -24,8 +24,8 @@ export const NavContainer = styled.div`
 
   ${media.mobile} {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.4rem;
   }
 `;
 
@@ -57,8 +57,7 @@ export const NavSecondContainer = styled.div`
 
   ${media.mobile} {
     width: 100%;
-    justify-content: space-between;
-    gap: 0.5rem;
+    gap: 1.5rem;
   }
 
   .login {
@@ -139,9 +138,10 @@ export const SearchSecondContainer = styled.div`
   }
 
   ${media.mobile} {
-  gap: 0.1rem;
+    flex-wrap: nowrap;
+    gap: ${({ listing }) => (listing ? "0.1rem" : "0.1rem")};
     padding: 0.5rem;
-  widht: 100%;
+    width: 75%;
   }
 
   span {
@@ -156,8 +156,8 @@ export const SearchSecondContainer = styled.div`
     padding: 0.2rem 0.2rem;
 
     ${media.mobile} {
-    padding: 0;
-      width: 80%;
+      padding: 0.5rem;
+      
     }
   }
 
@@ -168,7 +168,7 @@ export const SearchSecondContainer = styled.div`
     margin: 0.1rem 0;
     cursor: pointer;
     ${media.mobile} {
-      font-size: 0.5rem;
+      font-size: 0.6rem;
     }
   }
   h6 {

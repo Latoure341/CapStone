@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { ListContainer, FormWrapper,
   SecondFormWrapper, SpanContainer,
   SpanUpperContainer, Button, ButtonWrapper } from "./ListingCreation.styled.js";
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
 
 const ListingCreation = () => {
   const [formData, setFormData] = useState({
@@ -114,7 +116,7 @@ const ListingCreation = () => {
       });
 
       // Send to backend
-      const response = await fetch("http://localhost:5000/api/listings", {
+      const response = await fetch(`${apiBaseUrl}/api/listings`, {
         method: "POST",
         body: submitFormData,
       });

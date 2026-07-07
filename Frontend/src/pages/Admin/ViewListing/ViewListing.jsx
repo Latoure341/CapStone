@@ -32,7 +32,7 @@ const ViewListing = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/listings/", {
+        const response = await fetch(`${apiBaseUrl}/api/listings/`, {
           method: "GET",
           "Content-type": "application/json",
         });

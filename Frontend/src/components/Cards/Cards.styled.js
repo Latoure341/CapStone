@@ -30,14 +30,13 @@ export const CardWrapper = styled.div`
 
 export const CardSubWrapper = styled.span`
   width: 300px;
-  height: 45vh;
+
   padding: 0;
   background-color: #b94141;
   border-radius: 10px;
 
   img {
     width: 100%;
-    height: 200px;
     border-radius: 5px;
     margin: 0;
     object-fit: contain;
@@ -64,7 +63,6 @@ export const CardSubWrapper = styled.span`
   ${media.laptop} {
     width: calc(50% - 0.5rem);
     min-width: 240px;
-    height: auto;
   }
 
   ${media.mobile} {
@@ -103,12 +101,12 @@ export const CardExperienceWrapper = styled.span`
   }
 
   ${media.tablet} {
-    width: 100%;
-    height: 45vh;
+    width: 48%;
+    height: 65vh;
   }
 
   ${media.mobile} {
-    height: 35vh;
+    height: 50vh;
 
     h2 {
       width: 70%;
@@ -250,18 +248,35 @@ export const InspirationCardWrapper = styled.div`
     margin: 0;
   }
 
+  ${media.mobile} {
+    .inspirationCategories,
+    .destinationContaiiner {
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .subParagraph,
+    p {
+      font-size: 8px;
+    }
+    span {
+      font-size: 8px;
+    }
+  }
+
   ${media.tablet} {
     .inspirationCategories,
     .destinationContaiiner {
       flex-wrap: wrap;
       align-items: center;
-    justify-content: space-between;
+      justify-content: space-between;
     }
-    .subParagraph, p {
-      font-size: 13px;
+    .subParagraph,
+    p {
+      font-size: 10px;
     }
-      span {
-        font-size: 14px;
-      }
+    span {
+      font-size: 10px;
+    }
   }
 `;

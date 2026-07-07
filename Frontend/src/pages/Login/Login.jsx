@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { IoIosMenu } from "react-icons/io";
 import { MdAccountCircle } from "react-icons/md";
 import { CiGlobe, CiSearch } from "react-icons/ci";
 import { LoginContainer,  ParagraphWrapper } from "./Login.styled.js";
+import { LogInContext } from "../../context/LogInContext.jsx";
 import {
   NavContainer,
   NavSecondContainer,
@@ -18,6 +19,8 @@ const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
+    const [ message, setMessage] = useState(null);
+    const { setLoggedIn } = useContext(LogInContext);
     const [password, setPassword] = useState("");
 
     const handleLogin = (e) => {
@@ -27,16 +30,19 @@ const Login = () => {
               const data = response.data;
               localStorage.setItem("LoginDetails", JSON.stringify(data))
                 localStorage.setItem("Logged In", JSON.stringify(true));
-                if(data.category == "admin"){
-                  alert(data.category)
+                if(data.user.category == "admin"){
+                  setMessage("Logged in successfully as admin");
+                  setLoggedIn(true);
                   navigate('/admin');
                 } else {
+                  setMessage("Logged in successfully");
                   navigate("/listing");
                 }
                 
             })
             .catch((error) => {
                 console.error("Login error:", error);
+                setMessage("Invalid email or password");
             });
     };
 
@@ -61,6 +67,7 @@ const Login = () => {
 
       <LoginContainer>
         <h1>Login</h1>
+        {message && <p style={{ color: "red" }}>{message}</p>}
         <form>
             <span>
                 <label htmlFor="email">Email:</label>

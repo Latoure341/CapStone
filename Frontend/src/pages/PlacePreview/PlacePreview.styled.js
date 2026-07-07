@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "../../styles/theme";
 
 export const PlaceContainer = styled.div`
   padding: 2rem 3rem;
@@ -43,9 +44,11 @@ export const ImageContainer = styled.div`
   border-radius: 10px;
 `;
 export const MainImageContainer = styled.span`
+  width: 50%;
   img {
-    width: 45rem;
-    height: 20rem;
+    width: 100%;
+    height: 100%;
+
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     object-fit: cover;
@@ -53,12 +56,15 @@ export const MainImageContainer = styled.span`
 `;
 
 export const ImageGrid = styled.span`
+  width: 50%;
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
+  gap: 0.3rem;
 
   img {
-    width: 17rem;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
   img:nth-child(2) {
@@ -74,6 +80,19 @@ export const PlaceDetailContainer = styled.div`
   align-items: start;
   gap: 4rem;
   padding: 0 3rem;
+
+  ${media.mobile} {
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  ${media.tablet} {
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+    padding: 1rem;
+  }
 `;
 
 export const DetailsContainer = styled.div`
@@ -164,9 +183,14 @@ export const CalendarWrapper = styled.div`
     gap: 0.3rem;
     color: rgb(150, 150, 150);
   }
-    .calendar {
-      padding: 1rem 0;
+  .calendar {
+    padding: 1rem 0;
+  }
+  ${media.mobile} {
+    DateRangePicker {
+      font-size: 0.3rem;
     }
+  }
 `;
 export const ReviewsContainer = styled.div`
   padding: 0.5rem 3rem;
@@ -188,7 +212,7 @@ export const ReviewsContainer = styled.div`
     margin: 0;
   }
   .reviewsSummary .count {
-    color: rgb(120,120,120);
+    color: rgb(120, 120, 120);
     margin: 0;
   }
 
@@ -210,25 +234,25 @@ export const ReviewsContainer = styled.div`
   }
   .label {
     width: 110px;
-    color: rgb(80,80,80);
+    color: rgb(80, 80, 80);
     font-weight: 500;
   }
   .bar {
     flex: 1;
     height: 6px;
-    background: rgb(230,230,230);
+    background: rgb(230, 230, 230);
     border-radius: 999px;
     overflow: hidden;
   }
   .barFill {
     height: 100%;
-    background: rgb(0,0,0);
+    background: rgb(0, 0, 0);
     border-radius: 999px;
   }
   .score {
     width: 36px;
     text-align: right;
-    color: rgb(70,70,70);
+    color: rgb(70, 70, 70);
     font-weight: 700;
   }
   .hostContactSection {
@@ -365,11 +389,11 @@ export const ReviewsContainer = styled.div`
     display: grid;
     place-items: center;
     border-radius: 6px;
-    color: rgb(80,80,80);
+    color: rgb(80, 80, 80);
     cursor: pointer;
   }
   .page.active {
-    background: rgb(245,245,245);
+    background: rgb(245, 245, 245);
     font-weight: 700;
   }
 `;

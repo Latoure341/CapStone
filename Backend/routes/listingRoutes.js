@@ -7,6 +7,7 @@ import {
   updateListing,
   deleteListing,
 } from '../controllers/listingController.js';
+import { optionalAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -25,10 +26,10 @@ const upload = multer({
   },
 });
 
-router.post("/", upload.array("images", 10), createListing);
+router.post("/", optionalAuth, upload.array("images", 10), createListing);
 router.get("/", getAllListings);
 router.get("/:id", getListingById);
-router.put("/:id", upload.array("images", 10), updateListing);
-router.delete("/delete", deleteListing);
+router.put("/:id", optionalAuth, upload.array("images", 10), updateListing);
+router.delete("/delete", optionalAuth, deleteListing);
 
 export default router;

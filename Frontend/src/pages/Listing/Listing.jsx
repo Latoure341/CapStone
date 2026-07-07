@@ -25,6 +25,7 @@ import {
   DetailsWrapper,
 } from "./Listing.styled.js";
 import { GuestsContext } from "../../context/GuestsContext.jsx";
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const Listing = () => {
   const { hotelLocation, setHotelLocation } = useContext(HotelLocationContext);
@@ -53,7 +54,7 @@ const Listing = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/listings/", {
+        const response = await fetch(`${apiBaseUrl}/api/listings/`, {
           method: "GET",
           "Content-type": "application/json",
         });
