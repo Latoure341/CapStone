@@ -1,4 +1,6 @@
-import React from "react";
+
+
+import React, { useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logo from "../../assets/airbnb.svg?react";
@@ -14,6 +16,8 @@ import {
   LogoWrapper,
 } from "../../components/NavBar/NavBar.styled.js";
 import { useState } from "react";
+import SignUpConfirm from "../../components/Modals/SignUpConfirm/SignUpConfirm.jsx";
+import { SignUpContext } from "../../context/SignUpContext.jsx";
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -23,16 +27,19 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [modal, setModal] = useState(false);
+  const { signUp, setSignUp } = useContext(SignUpContext);
 
   const handleSignup = (e) => {
     e.preventDefault();
     // Handle login logic here
     // After successful login, navigate to the listing page
     axios
-      .post(`${apiBaseUrl}/api/user/register`, { name, email, password, confirmPassword })
+      .post(`${apiBaseUrl}/api/user/register`, { name, email, password, confirmPassword, category: JSON.parse(localStorage.getItem("category")) })
       .then((response) => {
         // Handle successful login
-        navigate("/login");
+  
+        
       })
       .catch((error) => {
         // Handle login error
@@ -109,8 +116,10 @@ const Signup = () => {
           <p>Forgot Password ?</p>
           <button
             type="submit"
-            onClick={(e) => {
+            onClick={(e) => { 
+              setSignUp(true);
               handleSignup(e);
+              
             }}
           >
             Create an account
@@ -122,6 +131,9 @@ const Signup = () => {
             </span>
           </ParagraphWrapper>
         </form>
+        { signUp && (
+          <SignUpConfirm />
+        )}
       </SignUpContainer>
     </>
   );

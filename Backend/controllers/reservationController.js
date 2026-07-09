@@ -6,7 +6,7 @@ export const postReservation = async (req, res) => {
         if (!reservationDetails) {
             return res.status(400).json({ message: "Reservation details are required" });
         }
-
+        console.log("reservationDetails:", reservationDetails);
         const { BookedBy, property, checkedIn, checkedOut } = reservationDetails;
         if (!BookedBy || !property || !checkedIn || !checkedOut) {
             return res.status(400).json({ message: "All reservation fields are required" });

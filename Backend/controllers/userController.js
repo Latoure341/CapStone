@@ -4,7 +4,7 @@ import { generateToken } from "../middleware/auth.js";
 
 export const register = async (req, res) => {
   try {
-    const { name, email, password, confirmPassword } = req.body;
+    const { name, email, password, confirmPassword, category } = req.body;
 
     if (!name || !email || !password || !confirmPassword) {
       return res.status(400).json({ message: "All fields are required" });
@@ -24,6 +24,7 @@ export const register = async (req, res) => {
       username: name,
       useremail: email,
       password: hashedPassword,
+      category: category || "user",
     });
 
     await newUser.save();

@@ -70,16 +70,24 @@ const NavBar = () => {
           <p onClick={() => console.log("Become a host clicked")}>
             Become a host
           </p>
-          {logInModal && (<p className="login">
+          {logInModal && (<p style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "white",
+            gap: "10px",
+          }} 
+          className="login">
             {
               loggedIn ? <span onClick={() => {
                 localStorage.clear();
                 setLoggedIn(false);
                 navigate('/');
               }}>Log Out</span>: <span onClick={() => navigate('/login')}>Log In</span>
-            } <br/> 
+            } 
             {
-              loggedIn && <span onClick={() => reservationHandler()}>Reservations</span>
+              loggedIn && <span style={{ marginTop: "10px"}} onClick={() => reservationHandler()}>Reservations</span>
             }
           </p>)}
           <CiGlobe />

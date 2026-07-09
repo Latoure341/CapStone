@@ -122,13 +122,12 @@ const PlacePreview = () => {
     }
     setLoggedIn(true);
     const payload = {
-      BookedBy: username.username,
+      BookedBy: username.user.username,
       property: itemListing.listName,
       checkedIn: checkInDate,
       checkedOut: checkOutDate,
     };
     setReserverdInfo(payload);
-    console.log(payload.property);
     axios
       .post(`${apiBaseUrl}/api/reservation/reserve`, payload)
       .then((response) => {
@@ -136,6 +135,7 @@ const PlacePreview = () => {
         navigate("/listing");
       })
       .catch((error) => {
+        console.log(payload)
         console.error("Reservation error:", error);
       });
   };

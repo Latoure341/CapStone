@@ -7,19 +7,22 @@ import { HotelLocationProvider } from "./context/HotelLocationContext.jsx";
 import { NavBarContextProvider } from "./context/NavBarContext.jsx";
 import { GuestsContextProvider } from "./context/GuestsContext.jsx";
 import { LogInProvider } from "./context/LogInContext.jsx";
+import { SignUpProvider } from "./context/SignUpContext.jsx";
 function App() {
   return (
     <ThemeProvider theme={media}>
-      <LogInProvider>
-        <NavBarContextProvider>
-          <GuestsContextProvider>
-            <HotelLocationProvider>
-              <GlobalStyle />
-              <Router />
-            </HotelLocationProvider>
-          </GuestsContextProvider>
-        </NavBarContextProvider>
-      </LogInProvider>
+      <SignUpProvider>
+        <LogInProvider>
+          <NavBarContextProvider>
+            <GuestsContextProvider>
+              <HotelLocationProvider>
+                <GlobalStyle />
+                <Router />
+              </HotelLocationProvider>
+            </GuestsContextProvider>
+          </NavBarContextProvider>
+        </LogInProvider>
+      </SignUpProvider>
     </ThemeProvider>
   );
 }
